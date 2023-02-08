@@ -48,4 +48,9 @@ public class HomeActivity extends Activity {
         Intent coursesIntent = new Intent(HomeActivity.this, CoursesActivity.class);
         HomeActivity.this.startActivity(coursesIntent);
     }
+
+    public void buttonGraphOnClick(View v) {
+        Intent graphIntent = new Intent(HomeActivity.this, GraphActivity.class);
+        HomeActivity.this.startActivity(graphIntent);
+    }
 }
