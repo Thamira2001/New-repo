@@ -9,7 +9,10 @@
         android:id="@+id/textTitle"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/student_records_system" />
+        android:textAlignment="center"
+        android:textSize="50dp"
+        android:textColor="@color/colorPrimary"
+        android:text="SuperSet" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -47,7 +50,6 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
-            android:layout_marginBottom="60dp"
             android:onClick="buttonGraphOnClick"
             android:text="@string/graph" />
 
@@ -55,8 +57,17 @@
             android:id="@+id/buttonMyRoutines"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
             android:onClick="buttonMyRoutinesOnClick"
             android:text="My Routines" />
+
+        <Button
+            android:id="@+id/buttonStartWorkout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:onClick="buttonStartWorkoutOnClick"
+            android:text="Start Workout" />
 
     </LinearLayout>
 
