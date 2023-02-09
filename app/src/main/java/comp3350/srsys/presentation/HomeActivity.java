@@ -58,4 +58,9 @@ public class HomeActivity extends Activity {
         Intent mrIntent = new Intent(HomeActivity.this, MyRoutinesActivity.class);
         HomeActivity.this.startActivity(mrIntent);
     }
+
+    public void buttonStartWorkoutOnClick(View v) {
+        Intent swIntent = new Intent(HomeActivity.this, StartWorkoutActivity.class);
+        HomeActivity.this.startActivity(swIntent);
+    }
 }

@@ -8,6 +8,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".presentation.StartWorkoutActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.MyRoutinesActivity"
             android:exported="false" />
         <activity
