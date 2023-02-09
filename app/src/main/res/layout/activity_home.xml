@@ -21,37 +21,45 @@
         android:layout_alignParentEnd="true" />
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignWithParentIfMissing="false"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true">
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
 
         <Button
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/students"
             android:id="@+id/buttonStudents"
-            android:onClick="buttonStudentsOnClick" />
-
-        <Button
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/courses"
+            android:onClick="buttonStudentsOnClick"
+            android:text="@string/students" />
+
+        <Button
             android:id="@+id/buttonCourses"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
-            android:layout_marginBottom="60dp"
-            android:onClick="buttonCoursesOnClick" />
+            android:onClick="buttonCoursesOnClick"
+            android:text="@string/courses" />
 
         <Button
             android:id="@+id/buttonGraph"
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/graph"
-            android:onClick="buttonGraphOnClick"/>
+            android:layout_marginTop="60dp"
+            android:layout_marginBottom="60dp"
+            android:onClick="buttonGraphOnClick"
+            android:text="@string/graph" />
 
+        <Button
+            android:id="@+id/buttonMyRoutines"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:onClick="buttonMyRoutinesOnClick"
+            android:text="My Routines" />
 
     </LinearLayout>
+
+
 
 </RelativeLayout>

@@ -53,4 +53,9 @@ public class HomeActivity extends Activity {
         Intent graphIntent = new Intent(HomeActivity.this, GraphActivity.class);
         HomeActivity.this.startActivity(graphIntent);
     }
+
+    public void buttonMyRoutinesOnClick(View v) {
+        Intent mrIntent = new Intent(HomeActivity.this, MyRoutinesActivity.class);
+        HomeActivity.this.startActivity(mrIntent);
+    }
 }
