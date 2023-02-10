@@ -1,29 +1,23 @@
 package comp3350.srsys.tests.objects;
 
-import comp3350.srsys.objects.Exercise;
-
 import org.junit.Test;
 import static org.junit.Assert.*;
+
+import comp3350.srsys.objects.Exercise;
+
 public class ExerciseTest {
     @Test
-    public void testExercise(){
-        //checking for valid data
-        System.out.println("\n Starting testExercise\n");
-        Exercise ex= new Exercise("Shoulder Press");
+    public void testSet(){
+        System.out.println("\n start of testSet\n");
+        Exercise newExercise = new Exercise("Leg Press", 8, 120);
 
-        //check whether it is not null
-        assertNotNull("should be true\n",ex);
-        //check for valid data
-        assertTrue("should be True!\n", "Shoulder Press".equals(ex));
+        assertNotNull("Should be true because the object is not null!", newExercise);
+        assertTrue("Should be true", "Leg Press".equals(newExercise.getExercise()));
 
+        assertTrue("sould be true because expected reps should be greater than 0", newExercise.getExpReps() > 0);
 
-        //check for invalid data
-        assertTrue("should be false\n", "Leg Press".equals(ex));
+        assertTrue("should be true because expected time for exercise should take more than 0s", newExercise.getTime() > 0);
 
-
-        System.out.println("\n End of testExercise");
-
-
-
+        
     }
 }

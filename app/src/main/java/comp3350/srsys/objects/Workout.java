@@ -1,38 +1,43 @@
 package comp3350.srsys.objects;
-import java.util.Arrays;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Workout implements Workoutable {
     //instance variables
-    private Set [] workout;
-    private int workoutIndex;//used to index the array
-    private int totalExpWTime;
+    private List<Exercise> exercises;
+    private int totalWorkoutTime;
     //constructor
     public Workout(){
-        this.totalExpWTime=0;
-        this.workoutIndex=0;
-        this.workout=new Set[NUM_SETS];//creates an empty workout with 40 spots for sets
+        this.totalWorkoutTime =0;
+        this.exercises =new ArrayList<>();
+    }
+
+    //TODO: new constructor for testing
+    public Workout(List<Exercise> s){
+        this.totalWorkoutTime = 0;
+        this.exercises = s;
     }
 
     @Override
-    public void addSet(Set set) {
-        this.workout[workoutIndex]=set;
-        this.workoutIndex++;
+    public void addSet(Exercise exercise) {
+        exercises.add(exercise);
     }
 
-    @Override
-    public void totExpWorkoutTime() {
-        for(int i=0; i<workoutIndex;i++){
-            totalExpWTime+=workout[i].getTime();
+    private void calcTotalWorkoutTime() {
+        for(int i = 0; i< exercises.size(); i++){
+            totalWorkoutTime += exercises.get(i).getTime();
         }
     }
 
     @Override
-    public int getTotExpWTime() {
-        return totalExpWTime;
+    public int getTotalWorkoutTime() {
+        calcTotalWorkoutTime();
+        return totalWorkoutTime;
     }
 
     @Override
     public int getTotalSets() {
-        return workoutIndex;
+        return exercises.size();
     }
 }

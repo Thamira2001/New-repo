@@ -1,6 +1,6 @@
 package comp3350.srsys.objects;
-public interface Setable extends Activity {
-    //interface for set class
+public interface ExerciseIntf extends Activity {
+    //interface for Exercise class
     //each set has a exercise variable(to know which type of exercise this sts falls under)
     //each set has number of expected reps
     //each set has a number actual reps

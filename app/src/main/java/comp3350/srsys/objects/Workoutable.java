@@ -6,22 +6,15 @@ public interface Workoutable {
     //have an expected finish time using the total of all set completion times
     //actual start and finish times can be used to calculate actual time taken for completion of workout
     // rest time = actual time - expected time
-    //didnt implement the actual time part yet 
-
-
-    //Constant:
-    public static final int NUM_SETS = 40;
+    //didnt implement the actual time part yet
 
     //Methods
 
     //adds the set to the workout
-    public void addSet(Set set);
-
-    //calculates the total expected  workout time
-    public void totExpWorkoutTime();
+    public void addSet(Exercise exercise);
 
     //returns expected total workout time
-    public int getTotExpWTime();
+    public int getTotalWorkoutTime();
 
     //returns the number of sets in the workout
     public int getTotalSets();
