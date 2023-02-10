@@ -1,17 +1,21 @@
 package comp3350.srsys.application;
 
+import comp3350.srsys.objects.Workout;
 import comp3350.srsys.persistence.CoursePersistence;
 import comp3350.srsys.persistence.SCPersistence;
 import comp3350.srsys.persistence.StudentPersistence;
+import comp3350.srsys.persistence.WorkoutPersistence;
 import comp3350.srsys.persistence.stubs.CoursePersistenceStub;
 import comp3350.srsys.persistence.stubs.SCPersistenceStub;
 import comp3350.srsys.persistence.stubs.StudentPersistenceStub;
+import comp3350.srsys.persistence.stubs.WorkoutPersistenceStub;
 
 public class Services
 {
 	private static StudentPersistence studentPersistence = null;
 	private static CoursePersistence coursePersistence = null;
 	private static SCPersistence scPersistence = null;
+    private static WorkoutPersistence workoutPersistence = null;
 
 	public static synchronized StudentPersistence getStudentPersistence()
     {
@@ -39,5 +43,12 @@ public class Services
         }
 
         return scPersistence;
+    }
+
+    public static synchronized WorkoutPersistence getWorkoutPersistence() {
+        if(workoutPersistence == null) {
+            workoutPersistence = new WorkoutPersistenceStub();
+        }
+        return workoutPersistence;
     }
 }

@@ -1,6 +1,7 @@
 package comp3350.srsys.persistence.stubs;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import comp3350.srsys.objects.Exercise;
@@ -28,6 +29,11 @@ public class WorkoutPersistenceStub implements WorkoutPersistence {
 
         workouts.add(new Workout(plan1));
         workouts.add(new Workout(plan2));
+    }
+
+    @Override
+    public List<Workout> getWorkoutSequential() {
+        return Collections.unmodifiableList(workouts);
     }
 
     @Override
