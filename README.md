@@ -11,7 +11,7 @@ The system can also be used by personal trainers. These personal trainers will b
 ### Description of project ###
 Gym-goers will be able to create workouts within the app and have the ability to note down specific information about their routines when at the gym. Gym-goers will also be able to keep track of the time spent performing specific activities, the time spent resting, and the total time spent in a gym session. Each gym session will be stored within the app. The app will provide workout history and a graph to visualize and understand workout routines and trends.
 
-Superset will allow gym-goers to schedule workouts ahead of time. The app will also include goal setting tools to prompt and inform users of their set goals. The app will also remind gym-goers about the scheduled workout of the day and will congratulate them on reaching goals as positive reinforcement.
+Superset will allow gym-goers to schedule workouts ahead of time. The app will also include goal setting tools to prompt and inform users of their exercise goals. The app will also remind gym-goers about the scheduled workout of the day and will congratulate them on reaching goals as positive reinforcement.
 
 Superset will also have the option for users to upload progress pictures and their weight in order for them to track their progress better. Reminders will be sent at an interval specified by gym-goers. Furthermore, the app will combine their progress updates and their workout goal together quarterly throughout the year as a recollection of the user’s progress.
 

@@ -1,35 +1,62 @@
 package comp3350.srsys.objects;
-public class Exercise implements Activity {
+public class Exercise implements ExerciseIntf {
 
-    private String exName;
+    //instance variables
+    private int expectedTime;   // seconds
+    private int expectedReps;
+    private int actualReps;
+    private String name;
 
-    public Exercise(String exercise){
-        this.exName=exercise;
+    //constructor
+    public Exercise(String name, int expectedReps, int timeSeconds){
+        this.name =name;
+        this.expectedReps=expectedReps;
+        this.expectedTime =timeSeconds;
     }
+
+    @Override
+    public int getTime() {
+        return expectedTime;
+    }
+
+    @Override
+    public int getExpReps() {
+        return expectedReps;
+    }
+
+    @Override
+    public void setExReps(int reps) {
+        this.expectedReps=reps;
+    }
+
+    @Override
+    public int getActReps() {
+        return actualReps;
+    }
+
+    @Override
+    public void setActReps(int actReps) {
+        this.actualReps=actReps;
+    }
+
+
     @Override
     public String getExercise() {
-        return exName;
+        return this.name;
     }
 
     @Override
     public void setExercise(String name) {
-        this.exName=name;
+        this.name = name;
     }
 
-    //should have an equals function to check if nae of exercise can be used to match another exercise
     @Override
-    public  boolean equals(String exName){
-        if(getExercise().equals(exName))
-            return true;
+    public boolean equals(String exerciseName) {
+        boolean isEquals=false;
 
-        return false;
-    }
+        if(name.equals(exerciseName))
+            isEquals=true;
 
-
-    @Override
-    public String toString() {
-        return "Exercise  is " +
-                "exName='" + exName + '\'' +
-                '}';
+        return isEquals;
     }
 }

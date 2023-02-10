@@ -13,4 +13,6 @@ public class StartWorkoutActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_workout);
     }
+
+
 }
