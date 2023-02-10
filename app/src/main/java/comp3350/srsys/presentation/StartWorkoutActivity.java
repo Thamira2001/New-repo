@@ -14,5 +14,7 @@ public class StartWorkoutActivity extends Activity {
         setContentView(R.layout.activity_start_workout);
     }
 
+    // TODO: display exercise list
+
 
 }
