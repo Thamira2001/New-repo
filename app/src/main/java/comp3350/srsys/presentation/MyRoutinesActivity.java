@@ -99,7 +99,7 @@ public class MyRoutinesActivity extends Activity {
 
         if(!(exerciseName.equals(""))){
             itemsAdapter.add(exerciseName);
-            exercises = new Exercise(exerciseName);
+            exercises = new Exercise(exerciseName,0,0);
             exerciseList.add(exercises);
             newWorkout = new Workout(exerciseList);
 
