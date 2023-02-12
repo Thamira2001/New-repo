@@ -1,6 +1,5 @@
 package comp3350.srsys.application;
 
-import comp3350.srsys.presentation.CLI;
 
 public class Main
 {
@@ -8,7 +7,7 @@ public class Main
 
 	public static void main(String[] args)
 	{
-		CLI.run();
+		//CLI.run();
 		System.out.println("All done");
 	}
 
