@@ -34,8 +34,8 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
-            android:onClick="buttonStartWorkoutOnClick"
-            android:text="Start Workout" />
+            android:onClick="buttonStatisticsOnClick"
+            android:text="Statistics" />
 
         <Button
             android:id="@+id/buttonGraph"
