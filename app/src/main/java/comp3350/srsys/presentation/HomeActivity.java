@@ -1,7 +1,7 @@
 package comp3350.srsys.presentation;
 
 import comp3350.srsys.R;
-import comp3350.srsys.application.Main;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -50,8 +50,8 @@ public class HomeActivity extends Activity {
         HomeActivity.this.startActivity(mrIntent);
     }
 
-    public void buttonStartWorkoutOnClick(View v) {
-        Intent swIntent = new Intent(HomeActivity.this, StartWorkoutActivity.class);
-        HomeActivity.this.startActivity(swIntent);
+    public void buttonStatisticsOnClick(View v) {
+        Intent statisticsIntent = new Intent(HomeActivity.this, StatisticsActivity.class);
+        HomeActivity.this.startActivity(statisticsIntent);
     }
 }

@@ -30,8 +30,8 @@ public class WorkoutPersistenceStub implements WorkoutPersistence {
         eList2.add(e3);
         Routine r2 = new Routine("r2", eList2);
 
-        workouts.add(new Workout(r1));
-        workouts.add(new Workout(r2));
+        workouts.add(new Workout(r1, 0, 60*30));
+        workouts.add(new Workout(r2, 0, 60*10));
     }
 
     @Override

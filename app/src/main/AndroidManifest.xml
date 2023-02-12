@@ -11,7 +11,7 @@
             android:name=".presentation.AddRoutineActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.StartWorkoutActivity"
+            android:name=".presentation.StatisticsActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.MyRoutinesActivity"
@@ -32,34 +32,6 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="comp3350.srsys.presentation.HomeActivity" />
-        </activity>
-        <activity
-            android:name=".presentation.StudentsActivity"
-            android:label="@string/title_activity_students">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="comp3350.srsys.presentation.HomeActivity" />
-        </activity>
-        <activity
-            android:name=".presentation.StudentCoursesActivity"
-            android:label="@string/title_activity_student_courses">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="comp3350.srsys.presentation.StudentsActivity" />
-        </activity>
-        <activity
-            android:name=".presentation.CoursesActivity"
-            android:label="@string/title_activity_courses">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="comp3350.srsys.presentation.HomeActivity" />
-        </activity>
-        <activity
-            android:name=".presentation.CourseStudentsActivity"
-            android:label="@string/title_activity_course_students">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="comp3350.srsys.presentation.CoursesActivity" />
         </activity>
     </application>
 
