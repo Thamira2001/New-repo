@@ -26,7 +26,7 @@ public class Workout implements Workoutable {
 
     private void calcTotalWorkoutTime() {
         for(int i = 0; i< exercises.size(); i++){
-            totalWorkoutTime += exercises.get(i).getTime();
+            totalWorkoutTime += exercises.get(i).getDurationSec();
         }
     }
 
