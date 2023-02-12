@@ -1,6 +1,6 @@
-package comp3350.srsys.objects;
+// Purpose: defines a workout with start and end times
 
-import java.util.List;
+package comp3350.srsys.objects;
 
 public class Workout {
     private Routine routine;
@@ -29,7 +29,5 @@ public class Workout {
         if(endTimeSec == -1)
             this.endTimeSec = System.currentTimeMillis()/1000;
     }
-
-
 
 }

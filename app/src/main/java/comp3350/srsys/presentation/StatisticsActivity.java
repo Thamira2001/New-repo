@@ -3,8 +3,6 @@ package comp3350.srsys.presentation;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import comp3350.srsys.R;
