@@ -12,11 +12,11 @@ public class ExerciseTest {
         Exercise newExercise = new Exercise("Leg Press", 8, 120);
 
         assertNotNull("Should be true because the object is not null!", newExercise);
-        assertTrue("Should be true", "Leg Press".equals(newExercise.getExercise()));
+        assertTrue("Should be true", "Leg Press".equals(newExercise.getName()));
 
-        assertTrue("sould be true because expected reps should be greater than 0", newExercise.getExpReps() > 0);
+        assertTrue("sould be true because expected reps should be greater than 0", newExercise.getNumReps() > 0);
 
-        assertTrue("should be true because expected time for exercise should take more than 0s", newExercise.getTime() > 0);
+        assertTrue("should be true because expected time for exercise should take more than 0s", newExercise.getDurationSec() > 0);
 
         
     }
