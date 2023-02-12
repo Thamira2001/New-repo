@@ -3,7 +3,7 @@ package comp3350.srsys.objects;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Workout implements Workoutable {
+public class Workout {
     //instance variables
     private List<Exercise> exercises;
     private int totalWorkoutTime;
@@ -19,7 +19,7 @@ public class Workout implements Workoutable {
         this.exercises = s;
     }
 
-    @Override
+
     public void addSet(Exercise exercise) {
         exercises.add(exercise);
     }
@@ -30,13 +30,13 @@ public class Workout implements Workoutable {
         }
     }
 
-    @Override
+
     public int getTotalWorkoutTime() {
         calcTotalWorkoutTime();
         return totalWorkoutTime;
     }
 
-    @Override
+
     public int getTotalSets() {
         return exercises.size();
     }
