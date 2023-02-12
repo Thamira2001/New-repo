@@ -19,6 +19,13 @@ public class Routine {
     }
 
     public String getName() {return this.name;}
+    public List<Exercise> getExercises() {
+        List<Exercise> copy = new ArrayList<>();
+        for(int i = 0; i < exerciseList.size(); i++){
+            copy.add(exerciseList.get(i));
+        }
+        return copy;
+    }
 
     public boolean addExercise(Exercise e) {
         return exerciseList.add(e);

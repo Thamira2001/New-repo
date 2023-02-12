@@ -1,43 +1,30 @@
 package comp3350.srsys.objects;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Workout {
-    //instance variables
-    private List<Exercise> exercises;
-    private int totalWorkoutTime;
-    //constructor
-    public Workout(){
-        this.totalWorkoutTime =0;
-        this.exercises =new ArrayList<>();
+    private Routine routine;
+    private long startTime;
+    private long endTime;
+
+    public Workout(Routine r) {
+        this(r, -1, -1);
     }
 
-    //TODO: new constructor for testing
-    public Workout(List<Exercise> s){
-        this.totalWorkoutTime = 0;
-        this.exercises = s;
+    public Workout(Routine r, long startTime, long endTime) {
+        this.routine = r;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
-
-    public void addSet(Exercise exercise) {
-        exercises.add(exercise);
+    public void startWorkout() {
+        if(startTime == -1)
+            this.startTime = System.currentTimeMillis();
     }
 
-    private void calcTotalWorkoutTime() {
-        for(int i = 0; i< exercises.size(); i++){
-            totalWorkoutTime += exercises.get(i).getDurationSec();
-        }
-    }
-
-
-    public int getTotalWorkoutTime() {
-        calcTotalWorkoutTime();
-        return totalWorkoutTime;
+    public void endWorkout(){
+        if(endTime == -1)
+            this.endTime = System.currentTimeMillis();
     }
 
 
-    public int getTotalSets() {
-        return exercises.size();
-    }
+
 }
