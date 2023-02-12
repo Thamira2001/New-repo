@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import comp3350.srsys.application.Services;
+import comp3350.srsys.objects.Exercise;
 import comp3350.srsys.objects.Routine;
 import comp3350.srsys.persistence.RoutinePersistence;
 
@@ -50,12 +51,19 @@ public class AccessRoutines {
         return routine;
     }
 
-    public List<String> getRoutineNames() {
-        List<String> routineNames = new ArrayList<>();
+    public List<String> getRoutineDisplayable() {
+        List<String> displayable = new ArrayList<>();
         for(int i = 0; i < routineList.size(); i++) {
-            routineNames.add(routineList.get(i).getName());
+            Routine r = routineList.get(i);
+            String content = r.getName();
+            List<Exercise> exercises = r.getExercises();
+            for(int j = 0; j < exercises.size(); j++) {
+                Exercise e = exercises.get(j);
+                content += "\n\t"+e.getName()+"   "+e.getDurationSec()+"sec";
+            }
+            displayable.add(content);
         }
-        return routineNames;
+        return displayable;
     }
 
     public boolean insertRoutine(Routine currentRoutine) {
