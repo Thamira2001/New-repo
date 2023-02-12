@@ -13,7 +13,7 @@ public class Exercise {
     public Exercise(String name, int numReps, int durationSec){
         this.name = name;
         this.durationSec = durationSec;
-        this.numReps = 0;
+        this.numReps = numReps;
     }
     public Exercise(String name, int durationSec) {
         this(name, 0, durationSec);
