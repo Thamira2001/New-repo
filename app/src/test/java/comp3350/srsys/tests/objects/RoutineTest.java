@@ -13,7 +13,7 @@ import comp3350.srsys.objects.Routine;
 public class RoutineTest {
 
     @Test
-    public void testConstructor() {
+    public void testConstructorWithExerciseList() {
         List<Exercise> exerciseList = new ArrayList<>();
         Exercise exercise = new Exercise("push ups", 10, 120);
         exerciseList.add(exercise);
@@ -26,12 +26,28 @@ public class RoutineTest {
     }
 
     @Test
+    public void testConstructorWithoutExerciseList() {
+        Routine routine1 = new Routine("Cardio");
+        Routine routine2 = new Routine("Resting");
+
+        assertNotNull(routine1);
+        assertNotNull(routine2);
+        assertEquals("Cardio", routine1.getExercises());
+        assertEquals("Resting", routine2.getExercises());
+        assertEquals(0, routine1.getExercises().size());
+        assertEquals(0, routine2.getExercises().size());
+    }
+    
+    @Test
     public void testAddExercise() {
         Routine routine = new Routine("Upper Body");
-        Exercise exercise = new Exercise("push ups", 10, 120);
-        assertTrue(routine.addExercise(exercise));
-        assertEquals(1, routine.getExercises().size());
-        assertTrue(routine.getExercises().contains(exercise));
+        Exercise exercise1 = new Exercise("push ups", 10, 120);
+        Exercise exercise2 = new Exercise("squat", 5, 60);
+        assertTrue(routine.addExercise(exercise1));
+        assertTrue(routine.addExercise(exercise2));
+        assertEquals(2, routine.getExercises().size());
+        assertTrue(routine.getExercises().contains(exercise1));
+        assertTrue(routine.getExercises().contains(exercise2));
     }
 
     @Test
