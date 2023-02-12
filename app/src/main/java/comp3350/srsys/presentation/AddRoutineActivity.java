@@ -1,11 +1,9 @@
 package comp3350.srsys.presentation;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import java.util.ArrayList;
@@ -32,7 +30,6 @@ public class AddRoutineActivity extends Activity {
         exerciseNames = new ArrayList<>();
 
         // display exercise list
-        // routine name list
         ListView listView = (ListView) findViewById(R.id.exerciseList);
         ArrayAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_activated_2, android.R.id.text1, exerciseNames);
         listView.setAdapter(adapter);
