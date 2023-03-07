@@ -23,19 +23,19 @@
 
 
         <Button
+            android:id="@+id/buttonStartWorkout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="buttonStartWorkoutOnClick"
+            android:text="@string/startWorkout" />
+
+        <Button
             android:id="@+id/buttonMyRoutines"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
             android:onClick="buttonMyRoutinesOnClick"
             android:text="My Routines" />
-
-        <Button
-            android:id="@+id/buttonStartWorkout"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:onClick="buttonStatisticsOnClick"
-            android:text="Statistics" />
 
         <Button
             android:id="@+id/buttonGraph"
@@ -44,6 +44,14 @@
             android:layout_marginTop="60dp"
             android:onClick="buttonGraphOnClick"
             android:text="@string/graph" />
+
+        <Button
+            android:id="@+id/buttonStatistics"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:onClick="buttonStatisticsOnClick"
+            android:text="Statistics" />
 
     </LinearLayout>
 
