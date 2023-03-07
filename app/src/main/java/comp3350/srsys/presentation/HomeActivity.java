@@ -39,15 +39,19 @@ public class HomeActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-
-    public void buttonGraphOnClick(View v) {
-        Intent graphIntent = new Intent(HomeActivity.this, GraphActivity.class);
-        HomeActivity.this.startActivity(graphIntent);
+    public void buttonStartWorkoutOnClick(View v) {
+        Intent swIntent = new Intent(HomeActivity.this, StartWorkoutActivity.class);
+        HomeActivity.this.startActivity(swIntent);
     }
 
     public void buttonMyRoutinesOnClick(View v) {
         Intent mrIntent = new Intent(HomeActivity.this, MyRoutinesActivity.class);
         HomeActivity.this.startActivity(mrIntent);
+    }
+
+    public void buttonGraphOnClick(View v) {
+        Intent graphIntent = new Intent(HomeActivity.this, GraphActivity.class);
+        HomeActivity.this.startActivity(graphIntent);
     }
 
     public void buttonStatisticsOnClick(View v) {

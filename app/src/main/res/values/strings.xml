@@ -20,6 +20,9 @@
     <string name="gpa">GPA</string>
     <string name="fatalError">Fatal error</string>
     <string name="warning">Warning</string>
-
     <string name="graph">Graph</string>
+    <string name="startWorkout">Start Workout</string>
+    <string name="start">Start</string>
+    <string name="reset">Reset</string>
+    <string name="stop">Stop</string>
 </resources>
