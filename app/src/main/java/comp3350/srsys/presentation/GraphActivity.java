@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import comp3350.srsys.R;
+import comp3350.srsys.business.Statistics;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.Legend;
@@ -18,32 +19,38 @@ import java.util.ArrayList;
 
 public class GraphActivity extends Activity {
 
-    private float TEXT_SIZE = 32;
-
+    // Graph variables
+    private float TEXT_SIZE = 16;
     private BarChart barChart;
     private BarData barData;
     private BarDataSet barDataSet;
     private ArrayList<BarEntry> barEntriesArrayList;
+    private Statistics statistics;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graph);
 
+        // data
+        statistics = new Statistics();
+
         // create chart
         barChart = findViewById(R.id.idBarChart);
         getBarEntries();
-        barDataSet = new BarDataSet(barEntriesArrayList, "Activity (hours)");
+        barDataSet = new BarDataSet(barEntriesArrayList, "Activity (minutes)");
         barData = new BarData(barDataSet);
         barChart.setData(barData);
 
         // set visuals
-        barDataSet.setColors(Color.CYAN /*ColorTemplate.MATERIAL_COLORS*/ );
+        barDataSet.setColors(Color.CYAN );
         barDataSet.setValueTextColor(Color.BLACK);
         barDataSet.setValueTextSize(TEXT_SIZE);
         barChart.getDescription().setEnabled(false);
         Legend l = barChart.getLegend();
-        l.setTextSize(TEXT_SIZE);
+        l.setTextSize(40);
 
         // set x-axis
         ArrayList<String> xVals = getXVals();
@@ -52,6 +59,7 @@ public class GraphActivity extends Activity {
         xAxis.setDrawGridLines(false);
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setTextSize(TEXT_SIZE);
+        xAxis.setLabelCount(xVals.size());
         xAxis.setValueFormatter(new IndexAxisValueFormatter(xVals));
 
         // set y-axis (as left axis)
@@ -66,13 +74,11 @@ public class GraphActivity extends Activity {
     }
 
     private void getBarEntries() {
+        int[] workoutMinutesByMonth = statistics.workoutMinutesByMonth();
         barEntriesArrayList = new ArrayList<>();
-        barEntriesArrayList.add(new BarEntry(1f, 4));
-        barEntriesArrayList.add(new BarEntry(2f, 6));
-        barEntriesArrayList.add(new BarEntry(3f, 8));
-        barEntriesArrayList.add(new BarEntry(4f, 2));
-        barEntriesArrayList.add(new BarEntry(5f, 4));
-        barEntriesArrayList.add(new BarEntry(6f, 1));
+        for(int i = 0; i < workoutMinutesByMonth.length; i++) {
+            barEntriesArrayList.add(new BarEntry(i+1, workoutMinutesByMonth[i]));
+        }
     }
 
     private ArrayList<String> getXVals() {
