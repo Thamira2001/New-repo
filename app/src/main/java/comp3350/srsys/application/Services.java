@@ -5,22 +5,24 @@ import comp3350.srsys.persistence.WorkoutPersistence;
 import comp3350.srsys.persistence.stubs.RoutinePersistenceStub;
 import comp3350.srsys.persistence.stubs.WorkoutPersistenceStub;
 
+import comp3350.srsys.persistence.hsqldb.RoutinePersistenceHSQLDB;
+import comp3350.srsys.persistence.hsqldb.WorkoutPersistenceHSQLDB;
+
 public class Services
 {
     private static WorkoutPersistence workoutPersistence = null;
     private static RoutinePersistence routinePersistence = null;
 
-
     public static synchronized WorkoutPersistence getWorkoutPersistence() {
         if(workoutPersistence == null) {
-            workoutPersistence = new WorkoutPersistenceStub();
+            workoutPersistence = new WorkoutPersistenceHSQLDB(Main.getDBPathName());
         }
         return workoutPersistence;
     }
 
-    public static RoutinePersistence getRoutinePersistence() {
+    public static synchronized RoutinePersistence getRoutinePersistence() {
         if(routinePersistence == null) {
-            routinePersistence = new RoutinePersistenceStub();
+            routinePersistence = new RoutinePersistenceHSQLDB(Main.getDBPathName());
         }
         return routinePersistence;
     }
