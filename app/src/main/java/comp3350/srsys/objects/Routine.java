@@ -10,6 +10,7 @@ public class Routine {
     String name;
     List<Exercise> exerciseList;
 
+    public Routine(){}
     public Routine(String name, List<Exercise> exerciseList){
         this.name = name;
         this.exerciseList = exerciseList;
@@ -19,12 +20,18 @@ public class Routine {
     }
 
     public String getName() {return this.name;}
+    public void setName(String name) {this.name = name;}
+
     public List<Exercise> getExercises() {
         List<Exercise> copy = new ArrayList<>();
         for(int i = 0; i < exerciseList.size(); i++){
             copy.add(exerciseList.get(i));
         }
         return copy;
+    }
+
+    public void setExerciseList(List<Exercise> exerciseList) {
+        this.exerciseList = exerciseList;
     }
 
     public boolean addExercise(Exercise e) {
