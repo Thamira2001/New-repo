@@ -4,28 +4,35 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import comp3350.srsys.R;
 import comp3350.srsys.business.AccessRoutines;
-import comp3350.srsys.objects.Exercise;
+import comp3350.srsys.business.AccessWorkouts;
 import comp3350.srsys.objects.ExerciseList;
 import comp3350.srsys.objects.Routine;
+import comp3350.srsys.objects.Workout;
 
 
-public class StartWorkoutActivity extends Activity
+public class StartWorkoutActivity extends Activity implements OnItemSelectedListener
 {
     private int sec = 0;
     private boolean isRunning;
     private boolean wasRunning;
 
     private AccessRoutines accessRoutines;
-    List<Routine> routines;
-    Routine curRoutine;
+    private AccessWorkouts accessWorkouts;
+    private List<Routine> routines;
+    private Routine curRoutine;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,17 +47,37 @@ public class StartWorkoutActivity extends Activity
         runningTimer();
 
         accessRoutines = new AccessRoutines();
+        accessWorkouts = new AccessWorkouts();
         routines = accessRoutines.getRoutines();
-
-        // display dropdown to select routine
         curRoutine = routines.get(0);
+        List<String> routineNames = new ArrayList<>();
+        for(int i = 0; i < routines.size(); i++) routineNames.add(routines.get(i).getName());
 
-        // display exercise list of corresponding routine
+        // Setup routine spinner
+        Spinner spinner = (Spinner) findViewById(R.id.exercisespinner);
+        spinner.setOnItemSelectedListener(this);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, routineNames);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(dataAdapter);
+
+        updateExerciseList();
+
+    }
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        curRoutine = routines.get(position);
+        updateExerciseList();
+    }
+    public void onNothingSelected(AdapterView<?> arg0) {
+        curRoutine = routines.get(0);
+    }
+
+    public void updateExerciseList() {
         ExerciseList curExercises = curRoutine.getExercises();
         ListView listView = (ListView) findViewById(R.id.exerciseList);
-        ArrayAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_activated_2, android.R.id.text1, curExercises.getNames());
+        ArrayAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_activated_2, android.R.id.text1, curExercises.getNamesWithTime());
         listView.setAdapter(adapter);
     }
+
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         savedInstanceState.putInt("seconds", sec);
@@ -59,8 +86,7 @@ public class StartWorkoutActivity extends Activity
     }
 
     @Override
-    protected void onPause()
-    {
+    protected void onPause() {
         super.onPause();
         wasRunning = isRunning;
         isRunning = false;
@@ -77,12 +103,8 @@ public class StartWorkoutActivity extends Activity
     public void onClickStart(View view) {
         isRunning = true;
     }
-    public void onClickStop(View view) {
+    public void onClickPause(View view) {
         isRunning = false;
-    }
-    public void onClickReset(View view) {
-        isRunning = false;
-        sec = 0;
     }
     private void runningTimer() {
         final TextView t_View = (TextView)findViewById(R.id.time_view);
@@ -102,4 +124,18 @@ public class StartWorkoutActivity extends Activity
             }
         });
     }
+
+    public void onClickFinish(View view) {
+        // create new workout instance
+        Workout newW = new Workout(curRoutine, sec);
+        accessWorkouts.insertWorkout(newW);
+
+        // make toast prompt
+        Toast.makeText(getApplicationContext(),"Workout Successfully Saved",Toast.LENGTH_SHORT).show();
+
+        // exit page
+        finish();
+    }
+
+
 }

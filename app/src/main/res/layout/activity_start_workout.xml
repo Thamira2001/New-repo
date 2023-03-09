@@ -23,13 +23,56 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.071" />
 
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="128dp"
+        android:orientation="vertical"
+        android:padding="10dip"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dip"
+            android:layout_marginBottom="5dp"
+            android:text="Select Routine:" />
+
+        <Spinner
+            android:id="@+id/exercisespinner"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:prompt="@string/spinner_title" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="162dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="173dp"
+        android:layout_marginBottom="15dp"
+        android:text="Exercises"
+        android:textSize="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/exerciseList"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
     <ListView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
         android:id="@+id/exerciseList"
-        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
         android:layout_gravity="top"
-        android:choiceMode="singleChoice" />
+        android:layout_weight="1"
+        app:layout_constraintBottom_toTopOf="@+id/pause_button"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        tools:layout_editor_absoluteX="40dp" />
 
     <Button
         android:id="@+id/start_button"
@@ -47,13 +90,13 @@
         app:layout_constraintVertical_bias="0.944" />
 
     <Button
-        android:id="@+id/stop_button"
+        android:id="@+id/pause_button"
         android:layout_width="122dp"
         android:layout_height="60dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="50dp"
-        android:onClick="onClickStop"
-        android:text="@string/stop"
+        android:onClick="onClickPause"
+        android:text="@string/pause"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -61,12 +104,12 @@
         app:layout_constraintVertical_bias="0.943" />
 
     <Button
-        android:id="@+id/reset_button"
+        android:id="@+id/finish_button"
         android:layout_width="122dp"
         android:layout_height="60dp"
         android:layout_gravity="center_horizontal"
-        android:onClick="onClickReset"
-        android:text="@string/reset"
+        android:onClick="onClickFinish"
+        android:text="@string/finish"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.88"

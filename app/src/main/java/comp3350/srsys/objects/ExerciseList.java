@@ -32,4 +32,13 @@ public class ExerciseList {
         }
         return names;
     }
+
+    public List<String> getNamesWithTime() {
+        ArrayList<String> res = new ArrayList<>();
+        for(int i = 0; i < exercises.size(); i++) {
+            Exercise e = exercises.get(i);
+            res.add(e.getName() + "           " + e.getDurationSec() + " seconds");
+        }
+        return res;
+    }
 }

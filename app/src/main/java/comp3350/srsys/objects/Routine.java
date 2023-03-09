@@ -13,7 +13,7 @@ public class Routine {
     public Routine(){}
     public Routine(String name, ExerciseList exerciseList){
         this.name = name;
-        this.exerciseList = exerciseList;
+        this.exerciseList = exerciseList.copy();
     }
     public Routine(String name){
         this(name, new ExerciseList());

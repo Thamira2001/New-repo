@@ -30,9 +30,10 @@ public class WorkoutPersistenceHSQLDB implements WorkoutPersistence {
 
     private Workout fromResultSet(final ResultSet rs) throws SQLException {
         final Routine routine = getRoutineFromResultSet(rs);
-        final long startTimeSec = rs.getLong("startTimeSec");
-        final long endTimeSec = rs.getLong("endTimeSec");
-        return new Workout(routine, startTimeSec, endTimeSec);
+        //final long startTimeSec = rs.getLong("startTimeSec");
+        //final long endTimeSec = rs.getLong("endTimeSec");
+        int duration = 10;
+        return new Workout(routine, 10);
     }
 
     public Routine getRoutineFromResultSet(ResultSet rs) throws SQLException {
@@ -89,8 +90,8 @@ public class WorkoutPersistenceHSQLDB implements WorkoutPersistence {
         try (final Connection c = connection()) {
             final PreparedStatement st = c.prepareStatement("INSERT INTO workouts VALUES(?, ?, ?)");
             st.setString(1, routineToString(currentWorkout.getRoutine()));
-            st.setLong(2, currentWorkout.getStartTimeSec());
-            st.setLong(3, currentWorkout.getEndTimeSec());
+            //st.setLong(2, currentWorkout.getStartTimeSec());
+            //st.setLong(3, currentWorkout.getEndTimeSec());
             st.executeUpdate();
             return true;
         } catch (final SQLException e) {
@@ -124,10 +125,10 @@ public class WorkoutPersistenceHSQLDB implements WorkoutPersistence {
             rt.setString(1, routineToString(currentWorkout.getRoutine()));
             rt.executeUpdate();
             final PreparedStatement st = c.prepareStatement("DELETE FROM workout WHERE start time = ?");
-            st.setLong(1, currentWorkout.getStartTimeSec());
+            //st.setLong(1, currentWorkout.getStartTimeSec());
             st.executeUpdate();
             final PreparedStatement et = c.prepareStatement("DELETE FROM workout WHERE end time = ?");
-            et.setLong(1, currentWorkout.getEndTimeSec());
+            //et.setLong(1, currentWorkout.getEndTimeSec());
             et.executeUpdate();
             return true;
         } catch (final SQLException e) {

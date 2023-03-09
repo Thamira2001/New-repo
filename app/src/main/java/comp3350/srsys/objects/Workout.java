@@ -7,39 +7,20 @@ import java.time.Month;
 
 public class Workout {
     private Routine routine;
-    private long startTimeSec;
-    private long endTimeSec;
     private LocalDate date;
+    private int durationSec;
 
-    public Workout(Routine r) {
-        this(r, -1, -1);
-    }
-
-    public Workout(Routine r, long startTimeSec, long endTimeSec) {
+    public Workout(Routine r, int durationSec){
         this.routine = r;
-        this.startTimeSec = startTimeSec;
-        this.endTimeSec = endTimeSec;
-        this.date = LocalDate.now();
+        this.durationSec = durationSec;
     }
 
     public Routine getRoutine() {
         return routine;
     }
 
-    public long getStartTimeSec() {return startTimeSec;}
-    public long getEndTimeSec() {return endTimeSec;}
-
-    public int getDurationSec() {return (int)(endTimeSec - startTimeSec);}
+    public int getDurationSec() {return durationSec;}
     public Month getMonth() {return date.getMonth();}
 
-    public void startWorkout() {
-        if(startTimeSec == -1)
-            this.startTimeSec = System.currentTimeMillis()/1000;
-    }
-
-    public void endWorkout(){
-        if(endTimeSec == -1)
-            this.endTimeSec = System.currentTimeMillis()/1000;
-    }
 
 }

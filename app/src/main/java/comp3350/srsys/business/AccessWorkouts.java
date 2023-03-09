@@ -51,11 +51,11 @@ public class AccessWorkouts {
         return workout;
     }
 
-    boolean insertWorkout(final Workout currentWorkout) {
+    public boolean insertWorkout(final Workout currentWorkout) {
         return workoutPersistence.insertWorkout(currentWorkout);
     }
 
-    boolean deleteWorkout(final Workout currentWorkout) {
+    public boolean deleteWorkout(final Workout currentWorkout) {
         return workoutPersistence.deleteWorkout(currentWorkout);
     }
 }
