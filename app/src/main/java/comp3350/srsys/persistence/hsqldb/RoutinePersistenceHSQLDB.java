@@ -21,7 +21,6 @@ public class RoutinePersistenceHSQLDB implements RoutinePersistence {
 
     public RoutinePersistenceHSQLDB(final String dbPath) {
         this.dbPath = dbPath;
-        initWithData();
     }
 
     private Connection connection() throws SQLException {
@@ -116,10 +115,5 @@ public class RoutinePersistenceHSQLDB implements RoutinePersistence {
         } catch (final SQLException e) {
             throw new PersistenceException(e);
         }
-    }
-
-    private void initWithData() {
-        Routine r = new Routine("Routine100");
-        insertRoutine(r);
     }
 }
