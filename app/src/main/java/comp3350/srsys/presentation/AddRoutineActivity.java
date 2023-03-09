@@ -12,12 +12,12 @@ import java.util.List;
 import comp3350.srsys.R;
 import comp3350.srsys.business.AccessRoutines;
 import comp3350.srsys.objects.Exercise;
+import comp3350.srsys.objects.ExerciseList;
 import comp3350.srsys.objects.Routine;
 
 public class AddRoutineActivity extends Activity {
 
-    private List<Exercise> exercises;
-    private List<String> exerciseNames;
+    private ExerciseList exercises;
     private AccessRoutines accessRoutines;
 
     @Override
@@ -26,12 +26,11 @@ public class AddRoutineActivity extends Activity {
         setContentView(R.layout.activity_add_routine);
 
         accessRoutines = new AccessRoutines();
-        exercises = new ArrayList<>();
-        exerciseNames = new ArrayList<>();
+        exercises = new ExerciseList();
 
         // display exercise list
         ListView listView = (ListView) findViewById(R.id.exerciseList);
-        ArrayAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_activated_2, android.R.id.text1, exerciseNames);
+        ArrayAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_activated_2, android.R.id.text1, exercises.getNames());
         listView.setAdapter(adapter);
     }
 
@@ -59,11 +58,6 @@ public class AddRoutineActivity extends Activity {
         }
 
         Exercise toAdd = new Exercise(name, duration);
-        addExercise(toAdd);
-    }
-
-    private void addExercise(Exercise e) {
-        exercises.add(e);
-        exerciseNames.add(e.getName());
+        exercises.add(toAdd);
     }
 }

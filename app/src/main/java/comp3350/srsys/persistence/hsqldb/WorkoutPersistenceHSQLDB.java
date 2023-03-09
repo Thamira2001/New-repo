@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import comp3350.srsys.objects.ExerciseList;
 import comp3350.srsys.objects.Routine;
 import comp3350.srsys.objects.Workout;
 import comp3350.srsys.objects.Exercise;
@@ -36,7 +37,7 @@ public class WorkoutPersistenceHSQLDB implements WorkoutPersistence {
 
     public Routine getRoutineFromResultSet(ResultSet rs) throws SQLException {
         Routine routine = new Routine();
-        List<Exercise> exerciseList = new ArrayList<>();
+        ExerciseList exerciseList = new ExerciseList();
 
         // Set routine properties from ResultSet
         if (rs.next()) {
@@ -103,7 +104,9 @@ public class WorkoutPersistenceHSQLDB implements WorkoutPersistence {
 
         sb.append("Name: ").append(routine.getName()).append("\n");
         sb.append("Exercise List: ").append(routine.getExercises()).append("\n");
-        for (Exercise exercise : routine.getExercises()) {
+        ExerciseList exerciseList = routine.getExercises();
+        for (int i = 0; i < exerciseList.size(); i++) {
+            Exercise exercise =  exerciseList.get(i);
             sb.append("Name: ").append(exercise.getName()).append("\n");
             sb.append("DurationSecond: ").append(exercise.getDurationSec()).append("\n");
             sb.append("Number of reps: ").append(exercise.getNumReps()).append("\n\n");

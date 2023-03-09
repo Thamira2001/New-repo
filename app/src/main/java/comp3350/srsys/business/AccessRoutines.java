@@ -6,6 +6,7 @@ import java.util.List;
 
 import comp3350.srsys.application.Services;
 import comp3350.srsys.objects.Exercise;
+import comp3350.srsys.objects.ExerciseList;
 import comp3350.srsys.objects.Routine;
 import comp3350.srsys.persistence.RoutinePersistence;
 
@@ -28,7 +29,7 @@ public class AccessRoutines {
         this.routinePersistence = routinePersistence;
     }
 
-    public List<Routine> getRoutine()
+    public List<Routine> getRoutines()
     {
         routineList = routinePersistence.getRoutineSequential();
         return Collections.unmodifiableList(routineList);
@@ -62,7 +63,7 @@ public class AccessRoutines {
         for(int i = 0; i < routineList.size(); i++) {
             Routine r = routineList.get(i);
             String content = r.getName();
-            List<Exercise> exercises = r.getExercises();
+            ExerciseList exercises = r.getExercises();
             for(int j = 0; j < exercises.size(); j++) {
                 Exercise e = exercises.get(j);
                 content += "\n\t"+e.getName()+"   "+e.getDurationSec()+"sec";
