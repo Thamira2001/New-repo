@@ -30,14 +30,12 @@ public class WorkoutPersistenceHSQLDB implements WorkoutPersistence {
 
     private Workout fromResultSet(final ResultSet rs) throws SQLException {
         final Routine routine = getRoutineFromResultSet(rs);
-        //final long startTimeSec = rs.getLong("startTimeSec");
-        //final long endTimeSec = rs.getLong("endTimeSec");
-        int duration = 10;
-        return new Workout(routine, 10);
+        final int duration = rs.getInt("duration");
+        return new Workout(routine, duration);
     }
 
     public Routine getRoutineFromResultSet(ResultSet rs) throws SQLException {
-        Routine routine = new Routine();
+        Routine routine = new Routine("emptyName");
         ExerciseList exerciseList = new ExerciseList();
 
         // Set routine properties from ResultSet
@@ -90,14 +88,12 @@ public class WorkoutPersistenceHSQLDB implements WorkoutPersistence {
         try (final Connection c = connection()) {
             final PreparedStatement st = c.prepareStatement("INSERT INTO workouts VALUES(?, ?, ?)");
             st.setString(1, routineToString(currentWorkout.getRoutine()));
-            //st.setLong(2, currentWorkout.getStartTimeSec());
-            //st.setLong(3, currentWorkout.getEndTimeSec());
+            st.setInt(2, currentWorkout.getDurationSec());
             st.executeUpdate();
             return true;
         } catch (final SQLException e) {
             throw new PersistenceException(e);
         }
-
     }
 
     public String routineToString(Routine routine) {

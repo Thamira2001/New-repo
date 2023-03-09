@@ -21,6 +21,7 @@ public class RoutinePersistenceHSQLDB implements RoutinePersistence {
 
     public RoutinePersistenceHSQLDB(final String dbPath) {
         this.dbPath = dbPath;
+        initWithData();
     }
 
     private Connection connection() throws SQLException {
@@ -52,6 +53,7 @@ public class RoutinePersistenceHSQLDB implements RoutinePersistence {
 
         try(final Connection c = connection()) {
             final Statement st = c.createStatement();
+            System.out.println("Before query");
             final ResultSet rs = st.executeQuery("SELECT * FROM routines");
             while(rs.next())
             {
@@ -75,7 +77,7 @@ public class RoutinePersistenceHSQLDB implements RoutinePersistence {
             return false;
         }
         try (final Connection c = connection()) {
-            final PreparedStatement rt = c.prepareStatement("INSERT INTO routines VALUES(?, ?, ?)");
+            final PreparedStatement rt = c.prepareStatement("INSERT INTO routines VALUES(?, ?)");
             rt.setString(1, currentRoutine.getName());
             rt.setString(2, exerciseListToString(currentRoutine.getExercises()));
             rt.executeUpdate();
@@ -114,5 +116,10 @@ public class RoutinePersistenceHSQLDB implements RoutinePersistence {
         } catch (final SQLException e) {
             throw new PersistenceException(e);
         }
+    }
+
+    private void initWithData() {
+        Routine r = new Routine("Routine100");
+        insertRoutine(r);
     }
 }
