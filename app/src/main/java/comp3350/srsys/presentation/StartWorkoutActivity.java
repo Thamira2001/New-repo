@@ -4,9 +4,17 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.List;
 import java.util.Locale;
 import comp3350.srsys.R;
+import comp3350.srsys.business.AccessRoutines;
+import comp3350.srsys.objects.Exercise;
+import comp3350.srsys.objects.ExerciseList;
+import comp3350.srsys.objects.Routine;
 
 
 public class StartWorkoutActivity extends Activity
@@ -14,6 +22,10 @@ public class StartWorkoutActivity extends Activity
     private int sec = 0;
     private boolean isRunning;
     private boolean wasRunning;
+
+    private AccessRoutines accessRoutines;
+    List<Routine> routines;
+    Routine curRoutine;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +38,18 @@ public class StartWorkoutActivity extends Activity
             wasRunning = savedInstanceState .getBoolean("wasRunning");
         }
         runningTimer();
+
+        accessRoutines = new AccessRoutines();
+        routines = accessRoutines.getRoutines();
+
+        // display dropdown to select routine
+        curRoutine = routines.get(0);
+
+        // display exercise list of corresponding routine
+        ExerciseList curExercises = curRoutine.getExercises();
+        ListView listView = (ListView) findViewById(R.id.exerciseList);
+        ArrayAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_activated_2, android.R.id.text1, curExercises.getNames());
+        listView.setAdapter(adapter);
     }
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {

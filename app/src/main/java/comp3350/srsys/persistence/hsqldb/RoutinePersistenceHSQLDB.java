@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import comp3350.srsys.objects.Exercise;
+import comp3350.srsys.objects.ExerciseList;
 import comp3350.srsys.objects.Routine;
 import comp3350.srsys.persistence.RoutinePersistence;
 
@@ -28,12 +29,12 @@ public class RoutinePersistenceHSQLDB implements RoutinePersistence {
 
     private Routine fromResultSet(final ResultSet rs) throws SQLException {
         final String name = rs.getString("name");
-        final List<Exercise> exerciseList = getExerciseListFromResultSet(rs);
+        final ExerciseList exerciseList = getExerciseListFromResultSet(rs);
         return new Routine(name, exerciseList);
     }
 
-    public List<Exercise> getExerciseListFromResultSet(ResultSet rs) throws SQLException {
-        List<Exercise> exerciseList = new ArrayList<>();
+    public ExerciseList getExerciseListFromResultSet(ResultSet rs) throws SQLException {
+        ExerciseList exerciseList = new ExerciseList();
 
         while(rs.next()) {
             Exercise exercise = new Exercise();
@@ -84,10 +85,11 @@ public class RoutinePersistenceHSQLDB implements RoutinePersistence {
         }
     }
 
-    public String exerciseListToString(List<Exercise> exerciseList) {
+    public String exerciseListToString(ExerciseList exerciseList) {
         StringBuilder sb = new StringBuilder();
 
-        for (Exercise exercise : exerciseList) {
+        for (int i = 0; i < exerciseList.size(); i++) {
+            Exercise exercise = exerciseList.get(i);
             sb.append("Name: ").append(exercise.getName()).append("\n");
             sb.append("DurationSecond: ").append(exercise.getDurationSec()).append("\n");
             sb.append("Number of reps: ").append(exercise.getNumReps()).append("\n\n");

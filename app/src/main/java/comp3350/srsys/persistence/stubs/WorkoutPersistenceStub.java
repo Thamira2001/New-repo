@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import comp3350.srsys.objects.Exercise;
+import comp3350.srsys.objects.ExerciseList;
 import comp3350.srsys.objects.Routine;
 import comp3350.srsys.objects.Workout;
 import comp3350.srsys.persistence.WorkoutPersistence;
@@ -21,12 +22,12 @@ public class WorkoutPersistenceStub implements WorkoutPersistence {
         Exercise e2 = new Exercise("situp", 15, 120);
         Exercise e3 = new Exercise("bench press", 5, 45);
 
-        List<Exercise> eList = new ArrayList<>();
+        ExerciseList eList = new ExerciseList();
         eList.add(e1);
         eList.add(e2);
         Routine r1 = new Routine("r1", eList);
 
-        List<Exercise> eList2 = new ArrayList();
+        ExerciseList eList2 = new ExerciseList();
         eList2.add(e3);
         Routine r2 = new Routine("r2", eList2);
 

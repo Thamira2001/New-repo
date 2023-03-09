@@ -8,29 +8,25 @@ import java.util.List;
 public class Routine {
 
     String name;
-    List<Exercise> exerciseList;
+    ExerciseList exerciseList;
 
     public Routine(){}
-    public Routine(String name, List<Exercise> exerciseList){
+    public Routine(String name, ExerciseList exerciseList){
         this.name = name;
         this.exerciseList = exerciseList;
     }
     public Routine(String name){
-        this(name, new ArrayList<>());
+        this(name, new ExerciseList());
     }
 
     public String getName() {return this.name;}
     public void setName(String name) {this.name = name;}
 
-    public List<Exercise> getExercises() {
-        List<Exercise> copy = new ArrayList<>();
-        for(int i = 0; i < exerciseList.size(); i++){
-            copy.add(exerciseList.get(i));
-        }
-        return copy;
+    public ExerciseList getExercises() {
+        return exerciseList.copy();
     }
 
-    public void setExerciseList(List<Exercise> exerciseList) {
+    public void setExerciseList(ExerciseList exerciseList) {
         this.exerciseList = exerciseList;
     }
 
