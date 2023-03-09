@@ -1,8 +1,7 @@
 package comp3350.srsys.application;
 
 
-public class Main
-{
+public class Main {
 
 	private static String dbName="SC";
 
