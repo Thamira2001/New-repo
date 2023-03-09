@@ -21,6 +21,7 @@ public class Workout {
         this.endTimeSec = endTimeSec;
         this.date = LocalDate.now();
     }
+
     public Routine getRoutine() {
         return routine;
     }
