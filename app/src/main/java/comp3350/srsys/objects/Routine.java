@@ -10,7 +10,6 @@ public class Routine {
     String name;
     ExerciseList exerciseList;
 
-    public Routine(){}
     public Routine(String name, ExerciseList exerciseList){
         this.name = name;
         this.exerciseList = exerciseList.copy();
