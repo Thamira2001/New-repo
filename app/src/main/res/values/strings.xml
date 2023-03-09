@@ -23,6 +23,7 @@
     <string name="graph">Graph</string>
     <string name="startWorkout">Start Workout</string>
     <string name="start">Start</string>
-    <string name="reset">Reset</string>
-    <string name="stop">Stop</string>
+    <string name="finish">Finish</string>
+    <string name="pause">Pause</string>
+    <string name="spinner_title">Select Routine</string>
 </resources>
