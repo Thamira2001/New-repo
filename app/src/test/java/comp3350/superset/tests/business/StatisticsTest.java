@@ -38,11 +38,11 @@ public class StatisticsTest {
 
     @Test
     public void testWorkoutMinutesByMonth() {
-        workoutList.add(new Workout(r, Month.JANUARY, 1800));
-        workoutList.add(new Workout(r, Month.JANUARY, 2400));
-        workoutList.add(new Workout(r, Month.MARCH, 3600));
-        workoutList.add(new Workout(r, Month.APRIL, 1200));
-        workoutList.add(new Workout(r, Month.MAY, 3000));
+        workoutList.add(new Workout(r, 1, 1800));
+        workoutList.add(new Workout(r, 1, 2400));
+        workoutList.add(new Workout(r, 1, 3600));
+        workoutList.add(new Workout(r, 1, 1200));
+        workoutList.add(new Workout(r, 1, 3000));
         statistics = new Statistics(workoutList);
         int[] expectedMonthData = {4200/60, 0, 3600/60, 1200/60, 3000/60, 0, 0, 0, 0, 0, 0, 0};
         int[] ans = statistics.workoutMinutesByMonth();

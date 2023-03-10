@@ -30,7 +30,7 @@ public class WorkoutTest {
     public void testGetMonth() {
         ExerciseList exercises = new ExerciseList();
         Routine routine = new Routine("Chest Day", exercises);
-        Workout workout = new Workout(routine, Month.MARCH, 60);
-        assertEquals(Month.MARCH, workout.getMonth());
+        Workout workout = new Workout(routine, 3, 60);
+        assertEquals(Month.MARCH.getValue(), workout.getMonth());
     }
 }

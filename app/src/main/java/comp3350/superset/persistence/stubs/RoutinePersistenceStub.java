@@ -39,9 +39,4 @@ public class RoutinePersistenceStub implements RoutinePersistence {
     public boolean insertRoutine(Routine r) {
         return routineList.add(r);
     }
-
-    @Override
-    public boolean removeRoutine(Routine r) {
-        return routineList.remove(r);
-    }
 }

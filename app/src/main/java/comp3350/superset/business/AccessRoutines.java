@@ -34,10 +34,9 @@ public class AccessRoutines {
         for(int i = 0; i < routineList.size(); i++) {
             Routine r = routineList.get(i);
             String content = r.getName();
-            ExerciseList exercises = r.getExercises();
-            for(int j = 0; j < exercises.size(); j++) {
-                Exercise e = exercises.get(j);
-                content += "\n\t"+e.getName()+"   "+e.getDurationSec()+"sec";
+            List<String> exDisplayable = r.getExercises().getNamesWithTime();
+            for(int j = 0; j < exDisplayable.size(); j++) {
+                content += "\n\t"+exDisplayable.get(j);
             }
             displayable.add(content);
         }

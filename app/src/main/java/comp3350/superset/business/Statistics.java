@@ -26,16 +26,16 @@ public class Statistics {
             Workout w = workoutList.get(i);
             durationSec += w.getDurationSec();
         }
-        return durationSec/workoutList.size()/60;
+        return workoutList.size() == 0 ? 0 : durationSec/workoutList.size()/60;
     }
 
     public int[] workoutMinutesByMonth() {
         int[] monthData = new int[12];
         for(int i = 0; i < workoutList.size(); i++) {
             Workout w = workoutList.get(i);
-            Month m = w.getMonth();
+            int month = w.getMonth();
             int durationMinutes = w.getDurationSec()/60;
-            monthData[m.getValue()-1] += durationMinutes;
+            monthData[month-1] += durationMinutes;
         }
         return monthData;
     }

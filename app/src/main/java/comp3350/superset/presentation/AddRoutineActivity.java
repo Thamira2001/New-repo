@@ -26,10 +26,7 @@ public class AddRoutineActivity extends Activity {
         accessRoutines = new AccessRoutines();
         exercises = new ExerciseList();
 
-        // display exercise list
-        ListView listView = (ListView) findViewById(R.id.exerciseList);
-        ArrayAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_activated_2, android.R.id.text1, exercises.getNames());
-        listView.setAdapter(adapter);
+        updateExerciseListView();
     }
 
     public void buttonCreateRoutineOnClick(View view) {
@@ -46,6 +43,7 @@ public class AddRoutineActivity extends Activity {
     public void buttonAddExerciseOnClick(View view) {
         EditText textName = (EditText) findViewById(R.id.exerciseName);
         String name = textName.getText().toString();
+        if(name == null || name == "") name = "NO NAME";
 
         EditText textDur = (EditText)findViewById(R.id.exerciseDuration);
         int duration;
@@ -57,5 +55,13 @@ public class AddRoutineActivity extends Activity {
 
         Exercise toAdd = new Exercise(name, duration);
         exercises.add(toAdd);
+        updateExerciseListView();
+    }
+
+    private void updateExerciseListView() {
+        // display exercise list
+        ListView listView = (ListView) findViewById(R.id.exerciseList);
+        ArrayAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_activated_2, android.R.id.text1, exercises.getNamesWithTime());
+        listView.setAdapter(adapter);
     }
 }
