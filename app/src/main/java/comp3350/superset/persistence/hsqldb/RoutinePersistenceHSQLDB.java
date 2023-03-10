@@ -27,19 +27,24 @@ public class RoutinePersistenceHSQLDB implements RoutinePersistence {
     }
 
     private Routine fromResultSet(final ResultSet rs) throws SQLException {
+        final int curID = rs.getInt("ROUTINEID");
         final String name = rs.getString("NAME_R");
-        final ExerciseList exerciseList = new ExerciseList();//getExerciseListFromResultSet(rs);
+        final ExerciseList exerciseList = getExerciseListFromResultSet(rs, curID);
+
         return new Routine(name, exerciseList);
     }
 
-    public ExerciseList getExerciseListFromResultSet(ResultSet rs) throws SQLException {
-        ExerciseList exerciseList = new ExerciseList();
+    public ExerciseList getExerciseListFromResultSet(ResultSet rs, int curRoutineID) throws SQLException {
 
-        while(rs.next()) {
-            String name = rs.getString("name");
-            int dur = rs.getInt("durationSec");
-            int numReps = rs.getInt("numReps");
+        ExerciseList exerciseList = new ExerciseList();
+        boolean isNext = true;
+
+        while(isNext && rs.getInt("ROUTINEID") == curRoutineID) {
+            String name = rs.getString("NAME_E");
+            int dur = rs.getInt("DURATION_SEC");
+            int numReps = rs.getInt("NUMREPS");
             exerciseList.add(new Exercise(name, dur, numReps));
+            isNext = rs.next();
         }
         return exerciseList;
     }
@@ -50,7 +55,7 @@ public class RoutinePersistenceHSQLDB implements RoutinePersistence {
 
         try(final Connection c = connection()) {
             final Statement st = c.createStatement();
-            final ResultSet rs = st.executeQuery("SELECT * FROM routine");
+            final ResultSet rs = st.executeQuery("SELECT * FROM routine JOIN exercise on routine.routineid = exercise.routineid");
             while(rs.next())
             {
                 final Routine routine = fromResultSet(rs);
