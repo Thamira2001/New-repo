@@ -1,4 +1,4 @@
-// Purpose: defines a workout with start and end times
+// Purpose: defines a workout with routine, day, and duration
 
 package comp3350.srsys.objects;
 
@@ -12,6 +12,13 @@ public class Workout {
 
     public Workout(Routine r, int durationSec){
         this.routine = r;
+        this.date = LocalDate.now();
+        this.durationSec = durationSec;
+    }
+
+    public Workout(Routine r, Month month, int durationSec){
+        this.routine = r;
+        this.date = LocalDate.of(2023 ,month, 01);
         this.durationSec = durationSec;
     }
 

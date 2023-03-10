@@ -36,11 +36,10 @@ public class RoutinePersistenceHSQLDB implements RoutinePersistence {
         ExerciseList exerciseList = new ExerciseList();
 
         while(rs.next()) {
-            Exercise exercise = new Exercise();
-            exercise.setName(rs.getString("name"));
-            exercise.setDurationSec(rs.getInt("durationSec"));
-            exercise.setNumReps(rs.getInt("numReps"));
-            exerciseList.add(exercise);
+            String name = rs.getString("name");
+            int dur = rs.getInt("durationSec");
+            int numReps = rs.getInt("numReps");
+            exerciseList.add(new Exercise(name, dur, numReps));
         }
         return exerciseList;
     }

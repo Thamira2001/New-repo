@@ -1,6 +1,7 @@
 package comp3350.srsys.tests.business;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
@@ -10,39 +11,38 @@ import org.junit.Test;
 
 import comp3350.srsys.business.AccessWorkouts;
 import comp3350.srsys.objects.Workout;
+import comp3350.srsys.persistence.WorkoutPersistence;
+import comp3350.srsys.persistence.stubs.WorkoutPersistenceStub;
 
 public class AccessWorkoutsTest {
 
-    private AccessWorkouts accessWorkouts;
+    private AccessWorkouts awUsingStub;
+    private WorkoutPersistence workoutStub;
 
     @Before
     public void setUp() {
-        accessWorkouts = new AccessWorkouts();
+        workoutStub = new WorkoutPersistenceStub();
+        awUsingStub = new AccessWorkouts(workoutStub);
     }
 
     @Test
     public void testGetWorkouts() {
-        List<Workout> workouts = accessWorkouts.getWorkouts();
-        assertTrue(workouts != null);
+        List<Workout> workouts = awUsingStub.getWorkouts();
+        assertNotNull(workouts);
+        assertEquals(workoutStub.getWorkoutSequential(), awUsingStub.getWorkouts());
     }
 
     @Test
     public void testGetWorkoutsNotEmpty() {
-        List<Workout> workouts = accessWorkouts.getWorkouts();
+        List<Workout> workouts = awUsingStub.getWorkouts();
         assertTrue(workouts.size() > 0);
-    }
-
-    @Test
-    public void testGetWorkoutsContainsWorkout() {
-        List<Workout> workouts = accessWorkouts.getWorkouts();
-        Workout workout = workouts.get(0);
-        assertTrue(workout != null);
+        assertNotNull(workouts.get(0));
     }
 
     @Test
     public void testGetWorkoutsCorrectSize() {
-        List<Workout> workouts = accessWorkouts.getWorkouts();
-        int expectedSize = 3;
+        List<Workout> workouts = awUsingStub.getWorkouts();
+        int expectedSize = 2;
         assertEquals(expectedSize, workouts.size());
     }
 }

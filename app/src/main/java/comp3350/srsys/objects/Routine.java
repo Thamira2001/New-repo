@@ -2,9 +2,6 @@
 
 package comp3350.srsys.objects;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Routine {
 
     String name;
@@ -12,7 +9,7 @@ public class Routine {
 
     public Routine(String name, ExerciseList exerciseList){
         this.name = name;
-        this.exerciseList = exerciseList.copy();
+        this.exerciseList = exerciseList;
     }
     public Routine(String name){
         this(name, new ExerciseList());
@@ -22,7 +19,7 @@ public class Routine {
     public void setName(String name) {this.name = name;}
 
     public ExerciseList getExercises() {
-        return exerciseList.copy();
+        return exerciseList;
     }
 
     public void setExerciseList(ExerciseList exerciseList) {

@@ -14,49 +14,20 @@ public class AccessRoutines {
 
     private RoutinePersistence routinePersistence;
     private List<Routine> routineList;
-    private Routine routine;
-    private int currentRoutine;
 
     public AccessRoutines() {
         routinePersistence = Services.getRoutinePersistence();
         routineList = routinePersistence.getRoutineSequential();
-        routine = null;
-        currentRoutine = 0;
+    }
+    public AccessRoutines(RoutinePersistence instance){
+        routinePersistence = instance;
+        routineList = routinePersistence.getRoutineSequential();
     }
 
-    public AccessRoutines(final RoutinePersistence routinePersistence) {
-        this();
-        this.routinePersistence = routinePersistence;
-    }
-
-    public List<Routine> getRoutines()
-    {
+    public List<Routine> getRoutines() {
         routineList = routinePersistence.getRoutineSequential();
         return Collections.unmodifiableList(routineList);
     }
-
-    public Routine getSequential()
-    {
-        String result = null;
-        if(routineList == null)
-        {
-            routineList = routinePersistence.getRoutineSequential();
-            currentRoutine = 0;
-        }
-        if(currentRoutine < routineList.size())
-        {
-            routine = (Routine) routineList.get(currentRoutine);
-            currentRoutine++;
-        }
-        else
-        {
-            routineList = null;
-            routine = null;
-            currentRoutine = 0;
-        }
-        return routine;
-    }
-
 
     public List<String> getRoutineDisplayable() {
         List<String> displayable = new ArrayList<>();
@@ -75,9 +46,5 @@ public class AccessRoutines {
 
     public boolean insertRoutine(Routine currentRoutine) {
         return routinePersistence.insertRoutine(currentRoutine);
-    }
-
-    public boolean removeRoutine(Routine currentRoutine) {
-        return routinePersistence.removeRoutine(currentRoutine);
     }
 }

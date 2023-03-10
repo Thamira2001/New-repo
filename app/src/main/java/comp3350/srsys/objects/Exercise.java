@@ -8,9 +8,6 @@ public class Exercise {
     private int durationSec;   // seconds
     private int numReps;
 
-
-    //constructor
-    public Exercise(){}
     public Exercise(String name, int numReps, int durationSec){
         this.name = name;
         this.durationSec = durationSec;
@@ -38,12 +35,4 @@ public class Exercise {
         this.numReps = reps;
     }
 
-    public String toString()
-    {
-        return String.format("Exercise: ");
-    }
-
-    public boolean equals(String exerciseName) {
-        return this.name.equals(exerciseName);
-    }
 }
