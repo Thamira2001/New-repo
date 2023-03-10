@@ -107,6 +107,11 @@ public class HomeActivity extends Activity {
         HomeActivity.this.startActivity(swIntent);
     }
 
+    public void buttonUploadProgressOnClick(View v) {
+        Intent upIntent = new Intent(HomeActivity.this, UploadProgressActivity.class);
+        HomeActivity.this.startActivity(upIntent);
+    }
+
     public void buttonMyRoutinesOnClick(View v) {
         Intent mrIntent = new Intent(HomeActivity.this, MyRoutinesActivity.class);
         HomeActivity.this.startActivity(mrIntent);
