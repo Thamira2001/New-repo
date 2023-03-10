@@ -62,6 +62,9 @@ public class UploadProgressActivity extends Activity {
                 }
             }
         }
+        if (null == preview.getDrawable()) {
+            finish();
+        }
     }
 
     public void buttonUploadOnClick(View v) {
