@@ -45,9 +45,4 @@ public class WorkoutPersistenceStub implements WorkoutPersistence {
         return this.workouts.add(w);
     }
 
-    @Override
-    public boolean deleteWorkout(Workout w) {
-        return this.workouts.remove(w);
-    }
-
 }

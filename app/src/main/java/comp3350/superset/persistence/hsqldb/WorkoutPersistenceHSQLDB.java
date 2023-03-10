@@ -29,31 +29,10 @@ public class WorkoutPersistenceHSQLDB implements WorkoutPersistence {
     }
 
     private Workout fromResultSet(final ResultSet rs) throws SQLException {
-        final Routine routine = getRoutineFromResultSet(rs);
-        final int duration = rs.getInt("duration");
-        return new Workout(routine, duration);
-    }
-
-    public Routine getRoutineFromResultSet(ResultSet rs) throws SQLException {
-        Routine routine = new Routine("emptyName");
-        ExerciseList exerciseList = new ExerciseList();
-
-        // Set routine properties from ResultSet
-        if (rs.next()) {
-            routine.setName(rs.getString("routine_name"));
-        }
-
-        // Get exercise list from ResultSet
-        rs.beforeFirst();
-        while (rs.next()) {
-            String name = rs.getString("name");
-            int dur = rs.getInt("durationSec");
-            int numReps = rs.getInt("numReps");
-            exerciseList.add(new Exercise(name, dur, numReps));
-        }
-
-        routine.setExerciseList(exerciseList);
-        return routine;
+        final Routine routine = RoutinePersistenceHSQLDB.getRoutinefromResultSet(rs);
+        final int month = rs.getInt("MONTH");
+        final int duration = rs.getInt("DURATION");
+        return new Workout(routine, month, duration);
     }
 
     @Override
@@ -61,8 +40,8 @@ public class WorkoutPersistenceHSQLDB implements WorkoutPersistence {
         final List<Workout> workouts = new ArrayList<>();
 
         try(final Connection c = connection()) {
-            final Statement st = c.createStatement();
-            final ResultSet rs = st.executeQuery("SELECT * FROM workouts");
+            final Statement st = c.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+            final ResultSet rs = st.executeQuery("SELECT * FROM workout JOIN routine on workout.id_r = routine.id_r JOIN exercise on routine.id_r = exercise.id_r");
             while(rs.next())
             {
                 final Workout workout = fromResultSet(rs);
@@ -85,9 +64,12 @@ public class WorkoutPersistenceHSQLDB implements WorkoutPersistence {
             return false;
         }
         try (final Connection c = connection()) {
-            final PreparedStatement st = c.prepareStatement("INSERT INTO workouts VALUES(?, ?, ?)");
-            st.setString(1, routineToString(currentWorkout.getRoutine()));
-            st.setInt(2, currentWorkout.getDurationSec());
+            final PreparedStatement st = c.prepareStatement("INSERT INTO workout VALUES(?, ?, ?, ?)");
+            int idW = nextWorkoutID();
+            st.setInt(1, idW);
+            st.setInt(2, currentWorkout.getMonth());
+            st.setInt(3, currentWorkout.getDurationSec());
+            st.setInt(4, getRoutineID(currentWorkout.getRoutine()));
             st.executeUpdate();
             return true;
         } catch (final SQLException e) {
@@ -95,41 +77,31 @@ public class WorkoutPersistenceHSQLDB implements WorkoutPersistence {
         }
     }
 
-    public String routineToString(Routine routine) {
-        StringBuilder sb = new StringBuilder();
-
-        sb.append("Name: ").append(routine.getName()).append("\n");
-        sb.append("Exercise List: ").append(routine.getExercises()).append("\n");
-        ExerciseList exerciseList = routine.getExercises();
-        for (int i = 0; i < exerciseList.size(); i++) {
-            Exercise exercise =  exerciseList.get(i);
-            sb.append("Name: ").append(exercise.getName()).append("\n");
-            sb.append("DurationSecond: ").append(exercise.getDurationSec()).append("\n");
-            sb.append("Number of reps: ").append(exercise.getNumReps()).append("\n\n");
+    private int nextWorkoutID() {
+        try(final Connection c = connection()) {
+            final Statement st = c.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+            final ResultSet rs = st.executeQuery("SELECT MAX(ID_W) as maxID FROM workout");
+            rs.next();
+            int maxID = rs.getInt("maxID");
+            return maxID + 1;
         }
-        return sb.toString();
-    }
-
-    @Override
-    public boolean deleteWorkout(final Workout currentWorkout) {
-        if(currentWorkout == null) {
-            return false;
-        }
-        try (final Connection c = connection()) {
-            final PreparedStatement rt = c.prepareStatement("DELETE FROM workout WHERE routine = ?");
-            rt.setString(1, routineToString(currentWorkout.getRoutine()));
-            rt.executeUpdate();
-            final PreparedStatement st = c.prepareStatement("DELETE FROM workout WHERE start time = ?");
-            //st.setLong(1, currentWorkout.getStartTimeSec());
-            st.executeUpdate();
-            final PreparedStatement et = c.prepareStatement("DELETE FROM workout WHERE end time = ?");
-            //et.setLong(1, currentWorkout.getEndTimeSec());
-            et.executeUpdate();
-            return true;
-        } catch (final SQLException e) {
+        catch(final SQLException e) {
             throw new PersistenceException(e);
         }
+    }
 
+    private int getRoutineID(Routine r) {
+        try(final Connection c = connection()) {
+            final PreparedStatement ps = c.prepareStatement("SELECT ID_R from routine where routine.name_r = ?");
+            ps.setString(1, r.getName());
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            int idR = rs.getInt("ID_R");
+            return idR;
+        }
+        catch(final SQLException e) {
+            throw new PersistenceException(e);
+        }
     }
 
 }

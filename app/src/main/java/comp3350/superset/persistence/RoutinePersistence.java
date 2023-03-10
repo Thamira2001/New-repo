@@ -9,7 +9,5 @@ public interface RoutinePersistence {
     List<Routine> getRoutineSequential();
 
     boolean insertRoutine(Routine r);
-
-    boolean removeRoutine(Routine r);
     
 }

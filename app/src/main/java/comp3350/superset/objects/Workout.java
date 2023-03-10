@@ -7,18 +7,19 @@ import java.time.Month;
 
 public class Workout {
     private Routine routine;
-    private LocalDate date;
+    private int month;
     private int durationSec;
 
     public Workout(Routine r, int durationSec){
         this.routine = r;
-        this.date = LocalDate.now();
+        this.month = LocalDate.now().getMonth().getValue();
+        System.out.println("MONTH TO_STRING IS THIS:" + this.month);
         this.durationSec = durationSec;
     }
 
-    public Workout(Routine r, Month month, int durationSec){
+    public Workout(Routine r, int month, int durationSec){
         this.routine = r;
-        this.date = LocalDate.of(2023 ,month, 01);
+        this.month = (0 < month && month <= 12) ? month : 1;
         this.durationSec = durationSec;
     }
 
@@ -27,7 +28,7 @@ public class Workout {
     }
 
     public int getDurationSec() {return durationSec;}
-    public Month getMonth() {return date.getMonth();}
+    public int getMonth() {return month;}
 
 
 }

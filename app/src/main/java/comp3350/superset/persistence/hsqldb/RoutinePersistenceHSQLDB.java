@@ -26,21 +26,27 @@ public class RoutinePersistenceHSQLDB implements RoutinePersistence {
         return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
     }
 
-    private Routine fromResultSet(final ResultSet rs) throws SQLException {
+    public static Routine getRoutinefromResultSet(final ResultSet rs) throws SQLException {
+        final int rID = rs.getInt("ID_R");
         final String name = rs.getString("NAME_R");
-        final ExerciseList exerciseList = new ExerciseList();//getExerciseListFromResultSet(rs);
+        final ExerciseList exerciseList = getExerciseListFromResultSet(rs, rID);
+
         return new Routine(name, exerciseList);
     }
 
-    public ExerciseList getExerciseListFromResultSet(ResultSet rs) throws SQLException {
+    public static ExerciseList getExerciseListFromResultSet(ResultSet rs, int curRID) throws SQLException {
+
         ExerciseList exerciseList = new ExerciseList();
 
-        while(rs.next()) {
-            String name = rs.getString("name");
-            int dur = rs.getInt("durationSec");
-            int numReps = rs.getInt("numReps");
+         do {
+            String name = rs.getString("NAME_E");
+            int dur = rs.getInt("DURATION_SEC");
+            int numReps = rs.getInt("NUMREPS");
             exerciseList.add(new Exercise(name, dur, numReps));
-        }
+        } while(rs.next() && rs.getInt("ID_R") == curRID);
+
+         rs.previous();
+
         return exerciseList;
     }
 
@@ -49,11 +55,10 @@ public class RoutinePersistenceHSQLDB implements RoutinePersistence {
         final List<Routine> routines = new ArrayList<>();
 
         try(final Connection c = connection()) {
-            final Statement st = c.createStatement();
-            final ResultSet rs = st.executeQuery("SELECT * FROM routine");
-            while(rs.next())
-            {
-                final Routine routine = fromResultSet(rs);
+            final Statement st = c.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+            final ResultSet rs = st.executeQuery("SELECT * FROM routine LEFT JOIN exercise on routine.id_r = exercise.id_r");
+            while(rs.next()) {
+                final Routine routine = getRoutinefromResultSet(rs);
                 routines.add(routine);
             }
             rs.close();
@@ -73,43 +78,40 @@ public class RoutinePersistenceHSQLDB implements RoutinePersistence {
             return false;
         }
         try (final Connection c = connection()) {
-            final PreparedStatement rt = c.prepareStatement("INSERT INTO routine VALUES(?, ?)");
-            rt.setString(1, currentRoutine.getName());
-            rt.setString(2, exerciseListToString(currentRoutine.getExercises()));
+            // insert new routine
+            PreparedStatement rt = c.prepareStatement("INSERT INTO routine VALUES(?, ?)");
+            int routineID = nextRoutineID();
+            rt.setInt(1, routineID);
+            rt.setString(2, currentRoutine.getName());
             rt.executeUpdate();
+
+            // insert new exercises, linked to routine id
+            ExerciseList eList = currentRoutine.getExercises();
+            for(int i = 0; i < eList.size(); i++) {
+                Exercise e = eList.get(i);
+                rt = c.prepareStatement("INSERT INTO exercise VALUES(?, ?, ?, ?)");
+                // name, duration, reps, rid
+                rt.setString(1, e.getName());
+                rt.setInt(2, e.getDurationSec());
+                rt.setInt(3, e.getNumReps());
+                rt.setInt(4, routineID);
+                rt.executeUpdate();
+            }
             return true;
         } catch (final SQLException e) {
             throw new PersistenceException(e);
         }
     }
 
-    public String exerciseListToString(ExerciseList exerciseList) {
-        StringBuilder sb = new StringBuilder();
-
-        for (int i = 0; i < exerciseList.size(); i++) {
-            Exercise exercise = exerciseList.get(i);
-            sb.append("Name: ").append(exercise.getName()).append("\n");
-            sb.append("DurationSecond: ").append(exercise.getDurationSec()).append("\n");
-            sb.append("Number of reps: ").append(exercise.getNumReps()).append("\n\n");
+    private int nextRoutineID() {
+        try(final Connection c = connection()) {
+            final Statement st = c.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+            final ResultSet rs = st.executeQuery("SELECT MAX(ID_R) as maxID FROM routine");
+            rs.next();
+            int maxID = rs.getInt("maxID");
+            return maxID + 1;
         }
-
-        return sb.toString();
-    }
-
-    @Override
-    public boolean removeRoutine(Routine currentRoutine) {
-        if(currentRoutine == null) {
-            return false;
-        }
-        try (final Connection c = connection()) {
-            final PreparedStatement n = c.prepareStatement("DELETE FROM routine WHERE name = ?");
-            n.setString(1, currentRoutine.getName());
-            n.executeUpdate();
-            final PreparedStatement el = c.prepareStatement("DELETE FROM routine WHERE exercise list = ?");
-            el.setString(1, exerciseListToString(currentRoutine.getExercises()));
-            el.executeUpdate();
-            return true;
-        } catch (final SQLException e) {
+        catch(final SQLException e) {
             throw new PersistenceException(e);
         }
     }

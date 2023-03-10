@@ -8,6 +8,4 @@ public interface WorkoutPersistence {
     List<Workout> getWorkoutSequential();
 
     boolean insertWorkout(final Workout w);
-
-    boolean deleteWorkout(final Workout w);
 }
