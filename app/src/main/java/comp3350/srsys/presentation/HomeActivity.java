@@ -2,6 +2,7 @@ package comp3350.srsys.presentation;
 
 import comp3350.srsys.R;
 import comp3350.srsys.application.Main;
+import comp3350.srsys.objects.Update;
 
 import android.app.Activity;
 import android.content.Context;
@@ -107,9 +108,9 @@ public class HomeActivity extends Activity {
         HomeActivity.this.startActivity(swIntent);
     }
 
-    public void buttonUploadProgressOnClick(View v) {
-        Intent upIntent = new Intent(HomeActivity.this, UploadProgressActivity.class);
-        HomeActivity.this.startActivity(upIntent);
+    public void buttonProgressOnClick(View v) {
+        Intent progressIntent = new Intent(HomeActivity.this, ProgressActivity.class);
+        HomeActivity.this.startActivity(progressIntent);
     }
 
     public void buttonMyRoutinesOnClick(View v) {

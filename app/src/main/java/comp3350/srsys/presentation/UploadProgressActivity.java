@@ -4,13 +4,16 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.content.Intent;
 import android.net.Uri;
-import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import java.util.Calendar;
+import java.util.Date;
+
 import comp3350.srsys.R;
+import comp3350.srsys.objects.Update;
 
 public class UploadProgressActivity extends Activity {
 
@@ -61,12 +64,20 @@ public class UploadProgressActivity extends Activity {
         }
     }
 
-    public void buttonUploadOnClick(View v)
-    {
-        preview.getDrawable(); // image file
-        System.out.println(date.getDayOfMonth()); // day
-        System.out.println(date.getMonth()); // month (starts from 0)
-        System.out.println(date.getYear()); // year
-        System.out.println(weight.getText()); // entered text (can be blank/whitespace)
+    public void buttonUploadOnClick(View v) {
+        Calendar currDate = new Calendar.Builder().build();
+        Calendar setDate = new Calendar.Builder().setDate(date.getYear(), date.getMonth(), date.getDayOfMonth()).build();
+        String strWeight = weight.getText().toString();
+        Update update;
+
+        currDate.setTime(new Date());
+        if (!setDate.after(currDate)) {
+            if (strWeight.isBlank()) {
+                update = new Update(preview.getDrawable(), setDate);
+            } else {
+                update = new Update(preview.getDrawable(), setDate, Integer.parseInt(strWeight));
+            }
+            finish();
+        }
     }
 }
