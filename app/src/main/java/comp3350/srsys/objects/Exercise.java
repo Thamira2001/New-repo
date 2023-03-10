@@ -20,7 +20,6 @@ public class Exercise {
         this(name, 0, durationSec);
     }
 
-
     // getters
     public String getName() {
         return this.name;

@@ -79,6 +79,7 @@ public class HomeActivity extends Activity {
         for (String asset : assets) {
             String[] components = asset.split("/");
             String copyPath = directory.toString() + "/" + components[components.length - 1];
+            System.out.println(copyPath);
 
             char[] buffer = new char[1024];
             int count;

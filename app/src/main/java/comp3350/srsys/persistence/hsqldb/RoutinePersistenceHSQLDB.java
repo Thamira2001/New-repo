@@ -14,7 +14,6 @@ import comp3350.srsys.objects.ExerciseList;
 import comp3350.srsys.objects.Routine;
 import comp3350.srsys.persistence.RoutinePersistence;
 
-
 public class RoutinePersistenceHSQLDB implements RoutinePersistence {
 
     private final String dbPath;
@@ -28,8 +27,8 @@ public class RoutinePersistenceHSQLDB implements RoutinePersistence {
     }
 
     private Routine fromResultSet(final ResultSet rs) throws SQLException {
-        final String name = rs.getString("name");
-        final ExerciseList exerciseList = getExerciseListFromResultSet(rs);
+        final String name = rs.getString("NAME_R");
+        final ExerciseList exerciseList = new ExerciseList();//getExerciseListFromResultSet(rs);
         return new Routine(name, exerciseList);
     }
 
@@ -52,8 +51,7 @@ public class RoutinePersistenceHSQLDB implements RoutinePersistence {
 
         try(final Connection c = connection()) {
             final Statement st = c.createStatement();
-            System.out.println("Before query");
-            final ResultSet rs = st.executeQuery("SELECT * FROM routines");
+            final ResultSet rs = st.executeQuery("SELECT * FROM routine");
             while(rs.next())
             {
                 final Routine routine = fromResultSet(rs);
@@ -76,7 +74,7 @@ public class RoutinePersistenceHSQLDB implements RoutinePersistence {
             return false;
         }
         try (final Connection c = connection()) {
-            final PreparedStatement rt = c.prepareStatement("INSERT INTO routines VALUES(?, ?)");
+            final PreparedStatement rt = c.prepareStatement("INSERT INTO routine VALUES(?, ?)");
             rt.setString(1, currentRoutine.getName());
             rt.setString(2, exerciseListToString(currentRoutine.getExercises()));
             rt.executeUpdate();
@@ -105,10 +103,10 @@ public class RoutinePersistenceHSQLDB implements RoutinePersistence {
             return false;
         }
         try (final Connection c = connection()) {
-            final PreparedStatement n = c.prepareStatement("DELETE FROM routines WHERE name = ?");
+            final PreparedStatement n = c.prepareStatement("DELETE FROM routine WHERE name = ?");
             n.setString(1, currentRoutine.getName());
             n.executeUpdate();
-            final PreparedStatement el = c.prepareStatement("DELETE FROM routines WHERE exercise list = ?");
+            final PreparedStatement el = c.prepareStatement("DELETE FROM routine WHERE exercise list = ?");
             el.setString(1, exerciseListToString(currentRoutine.getExercises()));
             el.executeUpdate();
             return true;
@@ -116,4 +114,6 @@ public class RoutinePersistenceHSQLDB implements RoutinePersistence {
             throw new PersistenceException(e);
         }
     }
+
+
 }
