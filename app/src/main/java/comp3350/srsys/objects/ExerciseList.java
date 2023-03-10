@@ -17,13 +17,7 @@ public class ExerciseList {
     public Exercise get(int i){return exercises.get(i);}
     public boolean add(Exercise e) {return exercises.add(e);}
     public boolean remove(Exercise e) {return exercises.remove(e);}
-    public ExerciseList copy() {
-        ExerciseList res = new ExerciseList();
-        for(int i = 0; i < exercises.size(); i++) {
-            res.add(exercises.get(i));
-        }
-        return res;
-    }
+    public boolean isEmpty() {return exercises.isEmpty();}
 
     public List<String> getNames() {
         ArrayList<String> names = new ArrayList<>();

@@ -1,7 +1,6 @@
 package comp3350.srsys.business;
 
 import java.time.Month;
-import java.util.ArrayList;
 import java.util.List;
 
 import comp3350.srsys.objects.Workout;
@@ -14,6 +13,10 @@ public class Statistics {
     public Statistics() {
         accessWorkouts = new AccessWorkouts();
         workoutList = accessWorkouts.getWorkouts();
+    }
+
+    public Statistics(List<Workout> workoutList) {
+        this.workoutList = workoutList;
     }
 
     // calculate average workout duration
@@ -32,7 +35,7 @@ public class Statistics {
             Workout w = workoutList.get(i);
             Month m = w.getMonth();
             int durationMinutes = w.getDurationSec()/60;
-            monthData[m.getValue()] += durationMinutes;
+            monthData[m.getValue()-1] += durationMinutes;
         }
         return monthData;
     }

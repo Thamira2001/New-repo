@@ -15,16 +15,16 @@ public class Services
 
     public static synchronized WorkoutPersistence getWorkoutPersistence() {
         if(workoutPersistence == null) {
-            workoutPersistence = new WorkoutPersistenceHSQLDB(Main.getDBPathName());
-            //workoutPersistence = new WorkoutPersistenceStub();
+            //workoutPersistence = new WorkoutPersistenceHSQLDB(Main.getDBPathName());
+            workoutPersistence = new WorkoutPersistenceStub();
         }
         return workoutPersistence;
     }
 
     public static synchronized RoutinePersistence getRoutinePersistence() {
         if(routinePersistence == null) {
-            routinePersistence = new RoutinePersistenceHSQLDB(Main.getDBPathName());
-            //routinePersistence = new RoutinePersistenceStub();
+            //routinePersistence = new RoutinePersistenceHSQLDB(Main.getDBPathName());
+            routinePersistence = new RoutinePersistenceStub();
         }
         return routinePersistence;
     }
