@@ -17,57 +17,81 @@ public class ExerciseTest {
         assertEquals(30, exercise.getDurationSec());
     }
     @Test
-    public void testConstructor2() {
-        Exercise exercise = new Exercise("situps", 45);
+    public void testConstructorNegativeDuration() {
+        Exercise exercise = new Exercise("situps", -45);
         assertEquals("situps", exercise.getName());
         assertEquals(0, exercise.getNumReps());
-        assertEquals(45, exercise.getDurationSec());
+        assertEquals(0, exercise.getDurationSec());
     }
 
     @Test
     public void testGetName() {
-        Exercise exercise = new Exercise("pullups", 5, 20);
-        assertEquals("pullups", exercise.getName());
+        Exercise e1 = new Exercise("pullups", 5, 20);
+        Exercise e2 = new Exercise("", 5, 20);
+
+        assertEquals("pullups", e1.getName());    // expected
+        assertEquals("", e2.getName());  // edge: empty name
     }
 
     @Test
     public void testGetDurationSec() {
-        Exercise exercise = new Exercise("jumping jacks", 0, 60);
-        assertEquals(60, exercise.getDurationSec());
+        Exercise e1 = new Exercise("jumping jacks", 0, 60);
+        Exercise e2 = new Exercise("jumping jacks", 0, 0);
 
-        exercise = new Exercise("jumping jacks", 0, 0);
-        assertEquals(0, exercise.getDurationSec());
+        assertEquals(60, e1.getDurationSec());  // expected
+        assertEquals(0, e2.getDurationSec());   // edge: no duration
     }
 
     // Test the getNumReps method
     @Test
     public void testGetNumReps() {
-        Exercise exercise = new Exercise("lunges", 12, 0);
-        assertEquals(12, exercise.getNumReps());
+        Exercise e1 = new Exercise("lunges", 12, 0);
+        Exercise e2 = new Exercise("lunges", 0, 0);
 
-        exercise = new Exercise("lunges", 0, 0);
-        assertEquals(0, exercise.getNumReps());
+        assertEquals(12, e1.getNumReps());  // expected
+        assertEquals(0, e2.getNumReps());   // edge: 0 value
     }
 
     @Test
     public void testSetName() {
         Exercise exercise = new Exercise("planks", 0, 30);
         exercise.setName("crunches");
-        assertEquals("crunches", exercise.getName());
+        assertEquals("crunches", exercise.getName());   // expected
+        exercise.setName("");
+        assertEquals("", exercise.getName());   // edge: empty name
     }
 
     @Test
     public void testSetDurationSec() {
-        Exercise exercise = new Exercise("squats", 0, 45);
-        exercise.setDurationSec(60);
-        assertEquals(60, exercise.getDurationSec());
+        Exercise e = new Exercise("squats", 0, 45);
+
+        // expected
+        e.setDurationSec(60);
+        assertEquals(60, e.getDurationSec());
+
+        // edge: 0 value
+        e.setDurationSec(0);
+        assertEquals(0, e.getDurationSec());
+
+        // edge: negative value
+        e.setDurationSec(-60);
+        assertEquals(0, e.getDurationSec());
+
     }
 
     @Test
     public void testSetNumReps() {
-        Exercise exercise = new Exercise("burpees", 0, 0);
-        exercise.setNumReps(20);
-        assertEquals(20, exercise.getNumReps());
+        Exercise e = new Exercise("burpees", 0, 0);
+        e.setNumReps(20);
+        assertEquals(20, e.getNumReps());
+
+        // edge: 0 value
+        e.setNumReps(0);
+        assertEquals(0, e.getNumReps());
+
+        // edge: neg value
+        e.setNumReps(-10);
+        assertEquals(0, e.getNumReps());
     }
 }
 

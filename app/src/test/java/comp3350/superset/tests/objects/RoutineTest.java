@@ -21,8 +21,11 @@ public class RoutineTest {
     public void testConstructorWithName() {
         String expectedName = "Test Routine";
         Routine newRoutine = new Routine(expectedName);
+
         assertEquals(expectedName, newRoutine.getName());
+        // constructs with empty ExerciseList
         assertTrue(newRoutine.getExercises().isEmpty());
+        assertNotNull(newRoutine.getExercises());
     }
 
     @Test
@@ -32,7 +35,10 @@ public class RoutineTest {
         exerciseList.add(new Exercise("Exercise 1", 0));
         exerciseList.add(new Exercise("Exercise 2", 0));
         Routine newRoutine = new Routine(expectedName, exerciseList);
+
+
         assertEquals(expectedName, newRoutine.getName());
+        // constructs with exerciseList
         assertFalse(newRoutine.getExercises().isEmpty());
         assertEquals(exerciseList, newRoutine.getExercises());
     }
@@ -44,26 +50,33 @@ public class RoutineTest {
 
     @Test
     public void testSetName() {
-        String expectedName = "New Routine Name";
-        routine.setName(expectedName);
-        assertEquals(expectedName, routine.getName());
+        routine.setName("new");
+        assertEquals("new", routine.getName()); // expected
+        routine.setName("");
+        assertEquals("", routine.getName());    // edge: empty name
     }
 
     @Test
     public void testGetExercises() {
+        // start with empty
         assertTrue(routine.getExercises().isEmpty());
         ExerciseList exerciseList = new ExerciseList();
         exerciseList.add(new Exercise("Exercise 1", 0));
         exerciseList.add(new Exercise("Exercise 2", 0));
         routine.setExerciseList(exerciseList);
+
+        // ensure correct exerciseList returned
         assertFalse(routine.getExercises().isEmpty());
         assertEquals(exerciseList, routine.getExercises());
     }
 
     @Test
     public void testAddExercise() {
+        // Start with empty
         assertTrue(routine.getExercises().isEmpty());
         Exercise exercise = new Exercise("Exercise 1", 0);
+
+        // ensure addition successful
         assertTrue(routine.addExercise(exercise));
         assertFalse(routine.getExercises().isEmpty());
         assertTrue(routine.getExercises().size() == 1);
@@ -71,10 +84,16 @@ public class RoutineTest {
 
     @Test
     public void testRemoveExercise() {
+
+        // start with empty
         assertTrue(routine.getExercises().isEmpty());
         Exercise exercise = new Exercise("Exercise 1", 0);
+
+        // edge: remove from empty list
         assertFalse(routine.removeExercise(exercise));
         assertTrue(routine.getExercises().isEmpty());
+
+        // expected
         routine.addExercise(exercise);
         assertTrue(routine.removeExercise(exercise));
         assertTrue(routine.getExercises().isEmpty());

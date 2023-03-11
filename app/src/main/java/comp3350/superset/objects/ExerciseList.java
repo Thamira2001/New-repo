@@ -1,3 +1,5 @@
+// Purpose: hold and provide functionality to list of exercises
+
 package comp3350.superset.objects;
 
 import java.util.List;

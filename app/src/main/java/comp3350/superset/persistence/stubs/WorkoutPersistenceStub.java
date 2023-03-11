@@ -44,5 +44,4 @@ public class WorkoutPersistenceStub implements WorkoutPersistence {
     public boolean insertWorkout(Workout w) {
         return this.workouts.add(w);
     }
-
 }

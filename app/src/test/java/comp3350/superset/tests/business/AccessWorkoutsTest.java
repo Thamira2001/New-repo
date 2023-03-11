@@ -16,32 +16,31 @@ import comp3350.superset.persistence.stubs.WorkoutPersistenceStub;
 
 public class AccessWorkoutsTest {
 
-    private AccessWorkouts awUsingStub;
-    private WorkoutPersistence workoutStub;
-
+    private AccessWorkouts aw;
+    private WorkoutPersistence p;
     @Before
-    public void setUp() {
-        workoutStub = new WorkoutPersistenceStub();
-        awUsingStub = new AccessWorkouts(workoutStub);
+    public void setup() {
+        p = new WorkoutPersistenceStub();
+        aw = new AccessWorkouts(p);
     }
 
     @Test
     public void testGetWorkouts() {
-        List<Workout> workouts = awUsingStub.getWorkouts();
+        List<Workout> workouts = aw.getWorkouts();
         assertNotNull(workouts);
-        assertEquals(workoutStub.getWorkoutSequential(), awUsingStub.getWorkouts());
+        assertEquals(p.getWorkoutSequential(), workouts);
     }
 
     @Test
     public void testGetWorkoutsNotEmpty() {
-        List<Workout> workouts = awUsingStub.getWorkouts();
+        List<Workout> workouts = aw.getWorkouts();
         assertTrue(workouts.size() > 0);
         assertNotNull(workouts.get(0));
     }
 
     @Test
     public void testGetWorkoutsCorrectSize() {
-        List<Workout> workouts = awUsingStub.getWorkouts();
+        List<Workout> workouts = aw.getWorkouts();
         int expectedSize = 2;
         assertEquals(expectedSize, workouts.size());
     }

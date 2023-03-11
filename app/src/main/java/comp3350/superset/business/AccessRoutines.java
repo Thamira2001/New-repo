@@ -5,8 +5,6 @@ import java.util.Collections;
 import java.util.List;
 
 import comp3350.superset.application.Services;
-import comp3350.superset.objects.Exercise;
-import comp3350.superset.objects.ExerciseList;
 import comp3350.superset.objects.Routine;
 import comp3350.superset.persistence.RoutinePersistence;
 
