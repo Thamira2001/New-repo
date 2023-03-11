@@ -9,10 +9,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import comp3350.superset.objects.ExerciseList;
 import comp3350.superset.objects.Routine;
 import comp3350.superset.objects.Workout;
-import comp3350.superset.objects.Exercise;
 import comp3350.superset.persistence.WorkoutPersistence;
 
 

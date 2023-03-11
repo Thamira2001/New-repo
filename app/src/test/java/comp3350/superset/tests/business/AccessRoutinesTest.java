@@ -12,29 +12,31 @@ import comp3350.superset.business.AccessRoutines;
 import comp3350.superset.objects.Exercise;
 import comp3350.superset.objects.ExerciseList;
 import comp3350.superset.objects.Routine;
-import comp3350.superset.persistence.RoutinePersistence;
 import comp3350.superset.persistence.stubs.RoutinePersistenceStub;
 
 public class AccessRoutinesTest {
-    private AccessRoutines arWithStub;
-    private RoutinePersistence mockRoutinePersistence;
-    private List<Routine> testRoutineList;
+    private AccessRoutines ar;
 
     @Before
     public void setUp() {
-        testRoutineList = new ArrayList<>();
-        arWithStub = new AccessRoutines(new RoutinePersistenceStub());
+        ar = new AccessRoutines(new RoutinePersistenceStub());
     }
 
     @Test
     public void testGetRoutineDisplayable() {
+        List<Routine> rList = ar.getRoutines();
 
         List<String> expectedResult = new ArrayList<>();
-        expectedResult.add("Routine1\n\te1   5sec\n\te2   10sec");
-        expectedResult.add("Routine2\n\te2   10sec");
-        expectedResult.add("Routine3\n\te1   5sec\n\te2   10sec");
+        for(Routine r : rList) {
+            String content = r.getName();
+            List<String> exDisplayable = r.getExercises().getNamesWithTime();
+            for(int i = 0; i < exDisplayable.size(); i++) {
+                content +="\n\t"+exDisplayable.get(i);
+            }
+            expectedResult.add(content);
+        }
 
-        assertEquals(expectedResult, arWithStub.getRoutineDisplayable());
+        assertEquals(expectedResult, ar.getRoutineDisplayable());
     }
 
     @Test
@@ -43,8 +45,8 @@ public class AccessRoutinesTest {
         exercises.add(new Exercise("Exercise1", 60));
         Routine routine = new Routine("Routine1", exercises);
 
-        assertTrue(arWithStub.insertRoutine(routine));
-        assertTrue(arWithStub.getRoutines().contains(routine));
+        assertTrue(ar.insertRoutine(routine));
+        assertTrue(ar.getRoutines().contains(routine));
     }
 }
 

@@ -10,6 +10,18 @@ import comp3350.superset.objects.Workout;
 import java.time.Month;
 
 public class WorkoutTest {
+
+    @Test
+    public void constructWorkout() {
+        Routine r = new Routine("hello");
+        Workout w1 = new Workout(r, 1, 100);
+        Workout w2 = new Workout(r, -1, 100);
+        Workout w3 =  new Workout(r, 5, -100);
+
+        assertEquals(100, w1.getDurationSec());  // expected
+        assertEquals(1, w2.getMonth());          // edge: invalid month provided (set to 1)
+        assertEquals(0, w3.getDurationSec()) ;   // edge: invalid duation (set to 0)
+    }
     @Test
     public void testGetRoutine() {
         ExerciseList exercises = new ExerciseList();

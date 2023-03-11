@@ -13,14 +13,13 @@ public class Workout {
     public Workout(Routine r, int durationSec){
         this.routine = r;
         this.month = LocalDate.now().getMonth().getValue();
-        System.out.println("MONTH TO_STRING IS THIS:" + this.month);
-        this.durationSec = durationSec;
+        this.durationSec = (durationSec >= 0) ? durationSec : 0;
     }
 
     public Workout(Routine r, int month, int durationSec){
         this.routine = r;
         this.month = (0 < month && month <= 12) ? month : 1;
-        this.durationSec = durationSec;
+        this.durationSec = (durationSec >= 0) ? durationSec : 0;
     }
 
     public Routine getRoutine() {

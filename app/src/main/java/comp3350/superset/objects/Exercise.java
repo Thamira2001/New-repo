@@ -10,7 +10,7 @@ public class Exercise {
 
     public Exercise(String name, int numReps, int durationSec){
         this.name = name;
-        this.durationSec = durationSec;
+        this.durationSec = (durationSec >= 0) ? durationSec : 0;
         this.numReps = numReps;
     }
     public Exercise(String name, int durationSec) {
@@ -30,9 +30,9 @@ public class Exercise {
     public void setName(String name) {
         this.name = name;
     }
-    public void setDurationSec(int sec) {this.durationSec = sec;}
+    public void setDurationSec(int sec) {this.durationSec = (sec >= 0) ? sec : 0;}
     public void setNumReps(int reps) {
-        this.numReps = reps;
+        this.numReps = (reps>=0) ? reps : 0;
     }
 
 }

@@ -14,7 +14,6 @@ public class Services {
     public static synchronized WorkoutPersistence getWorkoutPersistence() {
         if(workoutPersistence == null) {
             workoutPersistence = new WorkoutPersistenceHSQLDB(Main.getDBPathName());
-            //workoutPersistence = new WorkoutPersistenceStub();
         }
         return workoutPersistence;
     }
@@ -23,7 +22,6 @@ public class Services {
         System.out.println("PRINTING ROUTINE PERSISTENCE" + routinePersistence);
         if(routinePersistence == null) {
             routinePersistence = new RoutinePersistenceHSQLDB(Main.getDBPathName());
-            //routinePersistence = new RoutinePersistenceStub();
         }
         return routinePersistence;
     }
