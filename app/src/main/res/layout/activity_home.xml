@@ -30,6 +30,14 @@
             android:text="@string/startWorkout" />
 
         <Button
+            android:id="@+id/buttonProgress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:onClick="buttonProgressOnClick"
+            android:text="Progress" />
+
+        <Button
             android:id="@+id/buttonMyRoutines"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"

@@ -11,6 +11,12 @@
             android:name=".presentation.StartWorkoutActivity"
             android:exported="false" />
         <activity
+            android:name=".presentation.ProgressActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.UploadProgressActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.AddRoutineActivity"
             android:exported="false" />
         <activity
