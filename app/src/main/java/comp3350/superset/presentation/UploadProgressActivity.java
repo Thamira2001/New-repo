@@ -1,4 +1,4 @@
-package comp3350.srsys.presentation;
+package comp3350.superset.presentation;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -12,8 +12,8 @@ import android.widget.ImageView;
 import java.util.Calendar;
 import java.util.Date;
 
-import comp3350.srsys.R;
-import comp3350.srsys.objects.Update;
+import comp3350.superset.R;
+import comp3350.superset.objects.Update;
 
 public class UploadProgressActivity extends Activity {
 
