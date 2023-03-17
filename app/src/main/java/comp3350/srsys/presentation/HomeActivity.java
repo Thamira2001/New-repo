@@ -2,7 +2,6 @@ package comp3350.srsys.presentation;
 
 import comp3350.srsys.R;
 import comp3350.srsys.application.Main;
-import comp3350.srsys.objects.Update;
 
 import android.app.Activity;
 import android.content.Context;
