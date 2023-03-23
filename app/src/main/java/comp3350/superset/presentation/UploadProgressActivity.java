@@ -19,6 +19,7 @@ public class UploadProgressActivity extends Activity {
 
     ImageView preview;
     DatePicker date;
+    Uri imageURI;
     EditText weight;
 
     int SELECT_PICTURE = 200;
@@ -30,6 +31,7 @@ public class UploadProgressActivity extends Activity {
 
         preview = findViewById(R.id.preview);
         date = findViewById(R.id.datePicker);
+        imageURI = null;
         weight = findViewById(R.id.weight);
 
         imageChooser();
@@ -59,6 +61,7 @@ public class UploadProgressActivity extends Activity {
                 Uri selectedImageUri = data.getData();
                 if (null != selectedImageUri) {
                     preview.setImageURI(selectedImageUri);
+                    imageURI = selectedImageUri;
                 }
             }
         }
@@ -76,9 +79,10 @@ public class UploadProgressActivity extends Activity {
         currDate.setTime(new Date());
         if (!setDate.after(currDate)) {
             if (strWeight.isBlank()) {
-                update = new Update(preview.getDrawable(), setDate);
-            } else {
-                update = new Update(preview.getDrawable(), setDate, Integer.parseInt(strWeight));
+                update = new Update(imageURI, setDate);
+            }
+            else if (Integer.parseInt(strWeight) > 0) {
+                update = new Update(imageURI, setDate, Integer.parseInt(strWeight));
             }
             finish();
         }
