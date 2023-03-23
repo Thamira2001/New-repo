@@ -1,33 +1,35 @@
 package comp3350.superset.objects;
 
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
 public class Update {
 
-    private Drawable picture;
+    private Uri imageUri;
     private Date date;
     private int weight;
 
-    public Update(Drawable picture, Calendar date)
+    public Update(Uri imageUri, Calendar date)
     {
-        this.picture = picture;
+        this.imageUri = imageUri;
         this.date = date.getTime();
-        weight = -1;
+        this.weight = -1;
     }
 
-    public Update(Drawable picture, Calendar date, int weight)
+    public Update(Uri imageUri, Calendar date, int weight)
     {
-        this.picture = picture;
+        this.imageUri = imageUri;
         this.date = date.getTime();
         this.weight = weight;
     }
 
-    public Drawable getPicture()
+    public Uri getImageUri()
     {
-        return picture;
+        return imageUri;
     }
 
     public String getDate()
